@@ -1,9 +1,14 @@
 <template>
-  <div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div class="bg-white shadow-md rounded-md w-full text-center font-bold font-mono text-4xl">
+      {{ status }}
+    </div>
+    <div class="h-4"></div>
     <div class="grid grid-cols-3 gap-4 p-4 bg-white shadow-md rounded-md">
-      <UButton v-for="data in keys" :key="data.key" :disabled="data.type === 'empty'">
-        <UIcon v-if="data.type === 'enter'" name="i-heroicons-arrow-left-start-on-rectangle-16-solid" class="w-8 h-8" />
-        <div class="text-4xl font-bold">{{ data.key }}</div>
+      <UButton v-for="data in keys" :key="data.key" @click="handleKeyPress(data)">
+        <UIcon v-if="data.type === 'enter'" name="i-heroicons-arrow-turn-down-left-16-solid" class="w-8 h-8" />
+        <UIcon v-if="data.type === 'delete'" name="i-heroicons-backspace-16-solid" class="w-8 h-8" />
+        <div v-if="data.type === 'key'" class="text-4xl font-bold">{{ data.key }}</div>
         <div>{{ data.chars }}</div>
       </UButton>
     </div>
@@ -11,6 +16,12 @@
 </template>
 
 <script setup lang="ts">
+
+const KEY_DELETE = 'd'
+const KEY_ENTER = 'e'
+
+const status = ref('')
+const code = ref('')
 
 const keys = [
   { key: '1', chars: '', type: 'key' },
@@ -22,13 +33,30 @@ const keys = [
   { key: '7', chars: 'P Q R S', type: 'key' },
   { key: '8', chars: 'T U V', type: 'key' },
   { key: '9', chars: 'W X Y Z', type: 'key' },
-  { key: '', chars: '', type: 'empty' },
+  { key: '', chars: 'DEL', type: 'delete' },
   { key: '0', chars: '', type: 'key' },
   { key: '', chars: 'Enter', type: 'enter' },
-];
+]
 
-const handleKeyPress = (key: string): void => {
-  console.log(`Key pressed: ${key}`);
-};
+const handleKeyPress = (data: { key: string, type: string}): void => {
+  switch (data.type) {
+    case 'delete':
+      code.value = code.value.slice(0, -1)
+      break
+
+    default:
+      code.value += data.key
+  }
+
+  if (data.type === 'enter') {
+    code.value = ''
+    status.value = 'Processing...'
+    setTimeout(() => {
+      status.value = 'Done'
+    }, 1000)
+    return
+  }
+  status.value = '* '.repeat(code.value.length).trim()
+}
 
 </script>
