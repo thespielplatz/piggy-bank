@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col items-center justify-center min-h-screen">
-    <div class="text-center font-heading font-bold text-6xl">
+  <div class="flex flex-col items-center justify-center">
+    <div class="text-center font-heading font-bold text-6xl py-10">
       Piggy Bank
     </div>
     <div class="h-4"></div>

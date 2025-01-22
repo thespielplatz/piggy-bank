@@ -1,20 +1,19 @@
 <template>
-  <div class="flex flex-col items-center justify-center min-h-screen">
-    <div class="text-center font-heading font-bold text-6xl">
+  <div class="flex flex-col items-center justify-center">
+    <div class="text-center font-heading font-bold text-6xl pt-10">
       Piggy Bank
     </div>
-    <div class="h-4"></div>
-    <UButton
-      icon="i-heroicons-arrow-up-tray-16-solid"
-      size="sm"
-      @click="logout"      
-    >Logout</UButton>
     <div class="relative h-[500px] w-[600px] bg-[url('/assets/img/piggy.png')] bg-cover bg-center">
       <div class="absolute top-[240px] rounded-2xl left-1/2 w-full transform -translate-x-1/2 flex items-center justify-center text-center
        font-numbers text-4xl font-bold">
         {{ satsText }}
       </div>
     </div>  
+    <UButton
+      icon="i-heroicons-arrow-up-tray-16-solid"
+      size="sm"
+      @click="logout"      
+    >Logout</UButton>
   </div>  
 </template>
 

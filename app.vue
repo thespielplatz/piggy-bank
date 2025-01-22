@@ -1,5 +1,5 @@
 <template>
-  <div class="font-sans min-h-[var(--app-height)]">
+  <div class="font-sans">
     <UContainer>
       <div class="px-2">
         <NuxtPage />
