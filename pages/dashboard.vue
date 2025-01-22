@@ -3,12 +3,15 @@
     <div class="text-center font-heading font-bold text-6xl pt-10 pb-6">
       {{ title }}
     </div>
-    <div class="relative h-[290px] w-[384px] bg-[url('/assets/img/piggy.png')] bg-cover bg-center">
-      <div
-        class="absolute top-[135px] w-full flex justify-center -ml-2
-       font-numbers text-4xl font-bold"
-      >
-        {{ satsText }}
+    <div class="relative h-[290px] w-[384px] bg-[url('/assets/img/piggy.png')] bg-cover bg-center font-numbers ">
+      <div class="absolute top-[120px] w-full -ml-2 flex flex-col justify-center">
+        <div class="text-4xl font-black flex justify-center">
+          {{ satsText }}
+        </div>
+        <div class="text-l font-bold flex justify-between px-12">
+          <div>{{ rateText }}</div>
+          <div>{{ eurText }}</div>
+        </div>
       </div>
     </div>
     <div class="mt-2 min-w-80 bg-white shadow-md rounded-md p-2 flex justify-between">
@@ -63,6 +66,9 @@ const { $auth } = useNuxtApp()
 const isOpen = ref(false)
 
 const satsText = ref('Loading ...')
+const eurText = ref('')
+const rateText = ref('')
+const lastUpdate = ref('')
 const sats = ref(0)
 const title = ref('Piggy Bank')
 
@@ -74,6 +80,9 @@ onMounted(async () => {
   })
 
   title.value = `${response.name}'s Piggy Bank`
+  eurText.value = `${response.eur} EUR`
+  rateText.value = `1 BTC = ${response.rate} EUR`
+  lastUpdate.value = getCurrentTime()
 
   countTo({
     ref: sats,
