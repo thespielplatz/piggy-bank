@@ -1,6 +1,5 @@
 import z from 'zod'
-import { UserSchema } from '~/server/domain/config'
-import formatSats from '~/utils/formatSats'
+import type { UserSchema } from '~/server/domain/config'
 
 export const DashboardDto = z.object({
   name: z.string(),
@@ -10,11 +9,9 @@ export type DashboardDto = z.infer<typeof DashboardDto>
 
 export default defineLoggedInEventHandler(async (event, authUser) => {
   const user = authUser as UserSchema
-  const config = useConfig()
-
   const response = await fetch(`${user.lnbits.url}/api/v1/wallet`, {
     headers: {
-      'X-Api-Key': user.lnbits.invoiceKey
+      'X-Api-Key': user.lnbits.invoiceKey,
     },
   })
 

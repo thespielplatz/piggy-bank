@@ -9,7 +9,7 @@ const UserSchema = z.object({
   lnbits: z.object({
     url: z.string(),
     invoiceKey: z.string(),
-  })
+  }),
 })
 
 export type UserSchema = z.infer<typeof UserSchema>
