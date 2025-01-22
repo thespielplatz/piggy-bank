@@ -5,11 +5,6 @@
     </div>
     <div class="relative h-[290px] w-[384px] bg-[url('/assets/img/piggy.png')] bg-cover bg-center">
       <div
-        class="absolute top-[100px] w-full flex justify-center -ml-2
-       font-numbers text-4xl font-bold"
-      >
-      </div>      
-      <div
         class="absolute top-[135px] w-full flex justify-center -ml-2
        font-numbers text-4xl font-bold"
       >
@@ -35,23 +30,29 @@
   </div>
   <UModal v-model="isOpen">
     <UCard
-        :ui="{
-          base: 'h-full flex flex-col',
-          rounded: '',
-          divide: 'divide-y divide-gray-100 dark:divide-gray-800',
-          body: {
-            base: 'grow'
-          }
-        }"
-      >
-        <template #header>
-          <div class="flex items-center justify-between">
-            <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
-              LNURLp
-            </h3>
-            <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="isOpen = false" />
-          </div>
-        </template>
+      :ui="{
+        base: 'h-full flex flex-col',
+        rounded: '',
+        divide: 'divide-y divide-gray-100 dark:divide-gray-800',
+        body: {
+          base: 'grow',
+        },
+      }"
+    >
+      <template #header>
+        <div class="flex items-center justify-between">
+          <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+            LNURLp
+          </h3>
+          <UButton
+            color="gray"
+            variant="ghost"
+            icon="i-heroicons-x-mark-20-solid"
+            class="-my-1"
+            @click="isOpen = false"
+          />
+        </div>
+      </template>
     </UCard>
   </UModal>
 </template>

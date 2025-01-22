@@ -5,7 +5,7 @@ export default <Partial<Config>>{
     extend: {
       fontFamily: {
         heading: ['Fredoka', 'sans-serif'],
-        numbers: ['Tourney', 'sans-serif'],
+        numbers: ['Tektur', 'sans-serif'],
       },
       colors: {
         'background': '#fbcf48',
