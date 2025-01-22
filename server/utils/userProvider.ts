@@ -1,20 +1,16 @@
-const user = {
-  id: 'random-id',
-  name: 'Foo Bar',
-  accessKey: 'test',
-}
-
 export const userProvider: IUserProvider = {
   login(accessKey) {
-    if (user.accessKey === accessKey) {
-      return user
+    const user = useConfig().users?.find(user => user.accessKey === accessKey)
+    if (!user) {
+      return null
     }
-    return null
+    return user
   },
   getUser(userId: string) {
-    if (user.id === userId) {
-      return user
+    const user = useConfig().users?.find(user => user.id === userId)
+    if (!user) {
+      return null
     }
-    return null
+    return user
   },
 }
