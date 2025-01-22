@@ -10,30 +10,58 @@
       @click="logout"      
     >Logout</UButton>
     <div class="relative h-[500px] w-[600px] bg-[url('/assets/img/piggy.png')] bg-cover bg-center">
-      <div class="absolute top-[190px] w-96 h-36 rounded-2xl left-1/2 transform -translate-x-1/2 bg-dodger-blue-500 shadow-md text-white p-4 text-center content-center">
-        {{ sats }}
+      <div class="absolute top-[240px] rounded-2xl left-1/2 w-full transform -translate-x-1/2 flex items-center justify-center text-center
+       font-numbers text-4xl font-bold">
+        {{ satsText }}
       </div>
+    </div>  
   </div>  
-</div>  
 </template>
 
 <script setup lang="ts">
 
 const { $auth } = useNuxtApp()
 
-const sats = ref('Loading piggy bank ...')
+const satsText = ref('Loading ...')
+const sats = ref(0)
 
 onMounted(async () => {
   await $auth.redirectIfLoggedOut()
-  /*
-  list.value = await $auth.$fetch('/api/dashboard', {
+  
+  const response = await $auth.$fetch('/api/dashboard', {
     method: 'GET',
-  })*/
+  })
+  
+  countTo({
+    ref: sats,
+    endValue: response.sats,
+    duration: calculateDuration(response.sats),
+  })
 })
 
 const logout = async () => {
   await $auth.logout()
   await navigateTo('/')
+}
+
+watch(sats, (value) => {
+  satsText.value = `${formatSats(value)} BTC`
+})
+
+const calculateDuration = (endValue: number): number => {
+  const minSats = 1000
+  const maxSats = 1000000
+  const minDuration = 500 // 1 second
+  const maxDuration = 2000 // 5 seconds
+
+  if (endValue <= minSats) {
+    return minDuration
+  } else if (endValue >= maxSats) {
+    return maxDuration
+  }
+
+  const t = (endValue - minSats) / (maxSats - minSats)
+  return minDuration + t * (maxDuration - minDuration)
 }
 
 </script>

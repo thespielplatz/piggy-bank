@@ -4,12 +4,15 @@ import { z } from 'zod'
 
 const UserSchema = z.object({
   id: z.string(),
+  name: z.string(),
   accessKey: z.string(),
   lnbits: z.object({
     url: z.string(),
     invoiceKey: z.string(),
   })
 })
+
+export type UserSchema = z.infer<typeof UserSchema>
 
 export const ConfigSchema = z.object({
   users: z.array(UserSchema).default([]).optional(),
