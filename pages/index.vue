@@ -9,7 +9,7 @@
     </div>
     <div class="h-4"></div>
     <div class="min-w-96 grid grid-cols-3 gap-4 p-4 bg-white shadow-md rounded-md">
-      <UButton v-for="data in keys" :key="data.key" @click="handleKeyPress(data)">
+      <UButton v-for="data in keys" :key="data.key" @click="handleKeyPress(data)" :disabled="['enter', 'delete'].includes(data.type) && code.length === 0">
         <UIcon v-if="data.type === 'enter'" name="i-heroicons-arrow-turn-down-left-16-solid" class="w-8 h-8" />
         <UIcon v-if="data.type === 'delete'" name="i-heroicons-backspace-16-solid" class="w-8 h-8" />
         <div v-if="data.type === 'key'" class="text-4xl font-bold">{{ data.key }}</div>
@@ -73,6 +73,9 @@ const login = async () => {
       title: 'Code not valid',
       icon: 'i-heroicons-x-circle-16-solid',
       color: 'red',
+      timeout: 1500,
+      pauseTimeoutOnHover: false,
+      closeButton: false,
     })
   }
 }
