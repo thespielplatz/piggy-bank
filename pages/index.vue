@@ -21,6 +21,9 @@
 
 <script setup lang="ts">
 
+const { $auth } = useNuxtApp()
+const toast = useToast()
+
 const KEY_DELETE = 'd'
 const KEY_ENTER = 'e'
 
@@ -53,14 +56,29 @@ const handleKeyPress = (data: { key: string, type: string}): void => {
   }
 
   if (data.type === 'enter') {
-    code.value = ''
-    status.value = 'Processing...'
-    setTimeout(() => {
-      status.value = 'Done'
-    }, 1000)
+    login()
     return
   }
   status.value = '* '.repeat(Math.min(code.value.length, 9)).trim()
 }
+
+const login = async () => {
+  const success = await $auth.loginWithAccessKey(code.value)
+  code.value = ''
+  status.value = ''
+  if (success) {
+    await navigateTo('/dashboard')
+  } else {
+    toast.add({
+      title: 'Code not valid',
+      icon: 'i-heroicons-x-circle-16-solid',
+      color: 'red',
+    })
+  }
+}
+
+onMounted(async () => {
+  await $auth.redirectIfLoggedIn()
+})
 
 </script>

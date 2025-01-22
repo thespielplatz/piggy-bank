@@ -5,6 +5,7 @@
         <NuxtPage />
       </div>
     </UContainer>
+    <UNotifications />
   </div>
 </template>
 
