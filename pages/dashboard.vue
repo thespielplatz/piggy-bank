@@ -16,21 +16,50 @@
         {{ satsText }}
       </div>
     </div>
-    <div class="mt-2 min-w-96 bg-white shadow-md rounded-md p-2">
+    <div class="mt-2 min-w-80 bg-white shadow-md rounded-md p-2 flex justify-between">
       <UButton
-        icon="i-heroicons-arrow-up-tray-16-solid"
+        icon="i-heroicons-arrow-up-tray-20-solid"
         size="sm"
         @click="logout"
       >
         Logout
       </UButton>
+      <UButton
+        icon="i-heroicons-arrow-down-on-square-20-solid"
+        size="sm"
+        @click="isOpen = true"
+      >
+        Pay
+      </UButton>
     </div>
   </div>
+  <UModal v-model="isOpen">
+    <UCard
+        :ui="{
+          base: 'h-full flex flex-col',
+          rounded: '',
+          divide: 'divide-y divide-gray-100 dark:divide-gray-800',
+          body: {
+            base: 'grow'
+          }
+        }"
+      >
+        <template #header>
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+              LNURLp
+            </h3>
+            <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="isOpen = false" />
+          </div>
+        </template>
+    </UCard>
+  </UModal>
 </template>
 
 <script setup lang="ts">
 
 const { $auth } = useNuxtApp()
+const isOpen = ref(false)
 
 const satsText = ref('Loading ...')
 const sats = ref(0)
