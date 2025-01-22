@@ -16,12 +16,43 @@ A small piggybank for pre coiners and run by their custodian.
 
 ## Features
 
+- add a lnbits account to view behind a pincode
+- view only
 
 ## Roadmap
 
-- add a lnbits account to view behind a pincode
-- view only
-- show QR Code for lnurlp or lightning address
+- show QR Code for lnurlp or lightning address to pay
+
+## Configuration
+
+Create a `config.json`. Example:
+
+```json
+{
+  "users": [
+    {
+      "id": "justAnRandomString",
+      "name": "Dev Piggy Bank",
+      "accessKey": "333",
+      "lnbits": {
+        "url": "https://your.lnbits.com",
+        "invoiceKey": "6843498d6bbd4452b5853f7abdc3dac9"
+      }
+    }
+  ]
+}
+```
+
+## Dev
+
+```bash
+npm i
+nano config.json
+# copy the example and adjust lnbits account
+npm run dev
+```
+
+Access the piggy bank with 333 aka `DEV`
 
 ## Support
 
