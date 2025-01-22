@@ -1,0 +1,17 @@
+:root {
+  --app-height: 100dvh;
+}
+
+html,
+body {
+  height: var(--app-height);
+}
+
+@font-face {
+  font-family: "Fredoka";
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+  src: url("/assets/fonts/fredoka/Fredoka-VariableFont_wdth,wght.ttf") format("truetype");
+}

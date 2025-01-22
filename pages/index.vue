@@ -1,10 +1,14 @@
 <template>
-  <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-    <div class="bg-white shadow-md rounded-md w-full text-center font-bold font-mono text-4xl">
+  <div class="flex flex-col items-center justify-center min-h-screen">
+    <div class="text-center font-heading font-bold text-6xl">
+      Piggy Bank
+    </div>
+    <div class="h-4"></div>
+    <div class="bg-white min-w-96 h-14 pt-2 shadow-md rounded-md text-center font-bold font-mono text-4xl">
       {{ status }}
     </div>
     <div class="h-4"></div>
-    <div class="grid grid-cols-3 gap-4 p-4 bg-white shadow-md rounded-md">
+    <div class="min-w-96 grid grid-cols-3 gap-4 p-4 bg-white shadow-md rounded-md">
       <UButton v-for="data in keys" :key="data.key" @click="handleKeyPress(data)">
         <UIcon v-if="data.type === 'enter'" name="i-heroicons-arrow-turn-down-left-16-solid" class="w-8 h-8" />
         <UIcon v-if="data.type === 'delete'" name="i-heroicons-backspace-16-solid" class="w-8 h-8" />
@@ -56,7 +60,7 @@ const handleKeyPress = (data: { key: string, type: string}): void => {
     }, 1000)
     return
   }
-  status.value = '* '.repeat(code.value.length).trim()
+  status.value = '* '.repeat(Math.min(code.value.length, 9)).trim()
 }
 
 </script>
