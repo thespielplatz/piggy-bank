@@ -8,6 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
+    "lint": "eslint .",
     "bump-patch": "npm run lint && npx changelogen@latest --release && git push --follow-tags"
   },
   "dependencies": {
@@ -17,6 +18,8 @@
     "vue-router": "latest"
   },
   "devDependencies": {
-    "@thespielplatz/nuxt-auth": "^1.0.0"
+    "@nuxt/eslint-config": "^0.7.5",
+    "@thespielplatz/nuxt-auth": "^1.0.0",
+    "eslint": "^9.18.0"
   }
 }
