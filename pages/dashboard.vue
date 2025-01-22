@@ -24,11 +24,11 @@
       </UButton>
       <UButton
         v-if="address != null"
-        icon="i-heroicons-arrow-down-on-square-20-solid"
+        icon="i-heroicons-at-symbol-16-solid"
         size="sm"
-        @click="openPopup('LNURLp', lnurl)"
+        @click="openPopup(address, address)"
       >
-        LNURLp
+        Address
       </UButton>
       <UButton
         v-if="lnurl != null"
@@ -47,7 +47,7 @@
         rounded: '',
         divide: 'divide-y divide-gray-100 dark:divide-gray-800',
         body: {
-          base: 'grow',
+          base: '',
         },
       }"
     >
@@ -66,7 +66,7 @@
         </div>
       </template>
       <!-- // eslint-disable-next-line vue/no-v-html -->
-      <div v-html="popupQrCode" />
+      <div v-html="popupQrCode" class="flex justify-center" />
     </UCard>
   </UModal>
 </template>
@@ -100,6 +100,7 @@ onMounted(async () => {
   rateText.value = `1 BTC = ${response.rate} EUR`
   lastUpdate.value = getCurrentTime()
   lnurl.value = response.lnurl
+  address.value = response.address
 
   countTo({
     ref: sats,

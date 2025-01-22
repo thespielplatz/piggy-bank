@@ -43,6 +43,11 @@ Create a `config.json`. Example:
 }
 ```
 
+### Lnbits
+
+The app automatically reads all LNURL-pay extension links. If there are none, no LNURLp is shown. If there is even a username set in the extension
+a seond button will appear with `@ Address`.
+
 ## Dev
 
 ```bash
