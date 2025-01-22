@@ -1,23 +1,25 @@
 <template>
   <div class="flex flex-col items-center justify-center">
-    <div class="text-center font-heading font-bold text-6xl pt-10">
+    <div class="text-center font-heading font-bold text-6xl pt-10 pb-6">
       Piggy Bank
     </div>
-    <div class="relative h-[500px] w-[600px] bg-[url('/assets/img/piggy.png')] bg-cover bg-center">
+    <div class="relative h-[290px] w-[384px] bg-[url('/assets/img/piggy.png')] bg-cover bg-center">
       <div
-        class="absolute top-[240px] rounded-2xl left-1/2 w-full transform -translate-x-1/2 flex items-center justify-center text-center
+        class="absolute top-[135px] w-full flex justify-center -ml-2
        font-numbers text-4xl font-bold"
       >
         {{ satsText }}
       </div>
     </div>
-    <UButton
+    <div class="mt-2 min-w-96 bg-white shadow-md rounded-md p-2">
+      <UButton
       icon="i-heroicons-arrow-up-tray-16-solid"
       size="sm"
       @click="logout"
-    >
-      Logout
-    </UButton>
+      >
+        Logout
+      </UButton>
+    </div>
   </div>
 </template>
 
