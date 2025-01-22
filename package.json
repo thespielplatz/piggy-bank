@@ -7,7 +7,8 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "bump-patch": "npm run lint && npx changelogen@latest --release && git push --follow-tags"
   },
   "dependencies": {
     "@nuxt/ui": "^2.21.0",
