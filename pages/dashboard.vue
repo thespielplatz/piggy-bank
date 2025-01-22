@@ -13,9 +13,9 @@
     </div>
     <div class="mt-2 min-w-96 bg-white shadow-md rounded-md p-2">
       <UButton
-      icon="i-heroicons-arrow-up-tray-16-solid"
-      size="sm"
-      @click="logout"
+        icon="i-heroicons-arrow-up-tray-16-solid"
+        size="sm"
+        @click="logout"
       >
         Logout
       </UButton>
