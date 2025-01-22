@@ -18,10 +18,13 @@ A small piggybank for pre coiners and run by their custodian.
 
 - add a lnbits account to view behind a pincode
 - view only
+- Show LNURLp (the first one via LNBits API will be chosen)
+- Show LN Address
+- polling
 
 ## Roadmap
 
-- show QR Code for lnurlp or lightning address to pay
+- t.b.d.
 
 ## Configuration
 
