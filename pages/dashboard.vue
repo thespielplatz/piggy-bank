@@ -1,9 +1,14 @@
 <template>
   <div class="flex flex-col items-center justify-center">
     <div class="text-center font-heading font-bold text-6xl pt-10 pb-6">
-      Piggy Bank
+      {{ title }}
     </div>
     <div class="relative h-[290px] w-[384px] bg-[url('/assets/img/piggy.png')] bg-cover bg-center">
+      <div
+        class="absolute top-[100px] w-full flex justify-center -ml-2
+       font-numbers text-4xl font-bold"
+      >
+      </div>      
       <div
         class="absolute top-[135px] w-full flex justify-center -ml-2
        font-numbers text-4xl font-bold"
@@ -29,6 +34,7 @@ const { $auth } = useNuxtApp()
 
 const satsText = ref('Loading ...')
 const sats = ref(0)
+const title = ref('Piggy Bank')
 
 onMounted(async () => {
   await $auth.redirectIfLoggedOut()
@@ -36,6 +42,8 @@ onMounted(async () => {
   const response = await $auth.$fetch('/api/dashboard', {
     method: 'GET',
   })
+
+  title.value = `${response.name}'s Piggy Bank`
 
   countTo({
     ref: sats,
