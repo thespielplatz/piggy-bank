@@ -32,7 +32,7 @@ Create a `config.json`. Example:
   "users": [
     {
       "id": "justAnRandomString",
-      "name": "Dev Piggy Bank",
+      "name": "John Doe",
       "accessKey": "333",
       "lnbits": {
         "url": "https://your.lnbits.com",
