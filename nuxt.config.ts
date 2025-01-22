@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
     '@nuxt/ui',
+    '@thespielplatz/nuxt-auth',
   ],
   css: [
     '@/assets/css/global.css',
