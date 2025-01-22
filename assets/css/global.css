@@ -7,6 +7,11 @@ body {
   height: var(--app-height);
 }
 
+html, body {
+  touch-action: none; /* Prevents drag gestures */
+  overflow: hidden;
+}
+
 @font-face {
   font-family: "Fredoka";
   font-optical-sizing: auto;
