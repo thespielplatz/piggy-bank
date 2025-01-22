@@ -23,15 +23,24 @@
         Logout
       </UButton>
       <UButton
+        v-if="address != null"
         icon="i-heroicons-arrow-down-on-square-20-solid"
         size="sm"
-        @click="isOpen = true"
+        @click="openPopup('LNURLp', lnurl)"
       >
-        Pay
+        LNURLp
+      </UButton>
+      <UButton
+        v-if="lnurl != null"
+        icon="i-heroicons-arrow-down-on-square-20-solid"
+        size="sm"
+        @click="openPopup('LNURLp', lnurl)"
+      >
+        LNURLp
       </UButton>
     </div>
   </div>
-  <UModal v-model="isOpen">
+  <UModal v-model="isOpen" :ui="{ width: '' }">
     <UCard
       :ui="{
         base: 'h-full flex flex-col',
@@ -45,7 +54,7 @@
       <template #header>
         <div class="flex items-center justify-between">
           <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
-            LNURLp
+            {{ popupTitle }}
           </h3>
           <UButton
             color="gray"
@@ -56,11 +65,14 @@
           />
         </div>
       </template>
+      <!-- // eslint-disable-next-line vue/no-v-html -->
+      <div v-html="popupQrCode" />
     </UCard>
   </UModal>
 </template>
 
 <script setup lang="ts">
+import QRCode from 'qrcode-svg'
 
 const { $auth } = useNuxtApp()
 const isOpen = ref(false)
@@ -68,9 +80,13 @@ const isOpen = ref(false)
 const satsText = ref('Loading ...')
 const eurText = ref('')
 const rateText = ref('')
+const lnurl = ref<string | null>()
+const address = ref<string | null>()
 const lastUpdate = ref('')
 const sats = ref(0)
 const title = ref('Piggy Bank')
+const popupTitle = ref('')
+const popupQrCode = ref('')
 
 onMounted(async () => {
   await $auth.redirectIfLoggedOut()
@@ -83,6 +99,7 @@ onMounted(async () => {
   eurText.value = `${response.eur} EUR`
   rateText.value = `1 BTC = ${response.rate} EUR`
   lastUpdate.value = getCurrentTime()
+  lnurl.value = response.lnurl
 
   countTo({
     ref: sats,
@@ -90,6 +107,19 @@ onMounted(async () => {
     duration: calculateDuration(response.sats),
   })
 })
+
+const openPopup = (title: string, lnurl: string) => {
+  popupTitle.value = title
+  popupQrCode.value = new QRCode({
+    content: lnurl,
+    padding: 0,
+    width: 200,
+    height: 200,
+    color: '#000000',
+    background: '#ffffff',
+  }).svg()
+  isOpen.value = true
+}
 
 const logout = async () => {
   await $auth.logout()
