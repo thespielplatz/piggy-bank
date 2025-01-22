@@ -88,9 +88,33 @@ const title = ref('Piggy Bank')
 const popupTitle = ref('')
 const popupQrCode = ref('')
 
+const firstTime = false
+let intervalId: NodeJS.Timeout | null = null
+
 onMounted(async () => {
   await $auth.redirectIfLoggedOut()
+  startPolling()
+})
 
+onUnmounted(async () => {
+  stopPolling()
+})
+
+const startPolling = () => {
+  if (!intervalId) {
+    intervalId = setInterval(fetchData, 5000)
+    fetchData()
+  }
+}
+
+const stopPolling = () => {
+  if (intervalId) {
+    clearInterval(intervalId)
+    intervalId = null
+  }
+}
+
+const fetchData = async () => {
   const response = await $auth.$fetch('/api/dashboard', {
     method: 'GET',
   })
@@ -102,12 +126,16 @@ onMounted(async () => {
   lnurl.value = response.lnurl
   address.value = response.address
 
-  countTo({
-    ref: sats,
-    endValue: response.sats,
-    duration: calculateDuration(response.sats),
-  })
-})
+  if (firstTime) {
+    countTo({
+      ref: sats,
+      endValue: response.sats,
+      duration: calculateDuration(response.sats),
+    })
+  } else {
+    sats.value = response.sats
+  }
+}
 
 const openPopup = (title: string, lnurl: string) => {
   popupTitle.value = title
