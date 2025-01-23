@@ -1,6 +1,12 @@
 <template>
-  <ULink :to="tagLink" target="_blank">
-    <UBadge :ui="{ rounded: 'rounded-full' }" class="underline">
+  <ULink
+    :to="tagLink"
+    target="_blank"
+  >
+    <UBadge
+      :ui="{ rounded: 'rounded-full' }"
+      class="underline"
+    >
       {{ version }}
     </UBadge>
   </ULink>
