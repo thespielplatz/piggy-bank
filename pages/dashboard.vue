@@ -40,7 +40,7 @@
           Logout
         </UButton>
       </div>
-      <div class="pt-1 text-xs font-bold">
+      <div v-if="payment" class="pt-1 text-xs font-bold">
         <UDivider label="Last Payment" />
         <div class="flex justify-between">
           <div>{{ formatTime(payment?.time) }}</div>
@@ -94,6 +94,8 @@
 import QRCode from 'qrcode-svg'
 
 const { $auth } = useNuxtApp()
+const toast = useToast()
+
 const isOpen = ref(false)
 
 const satsText = ref('Loading ...')
@@ -135,9 +137,24 @@ const stopPolling = () => {
 }
 
 const fetchData = async () => {
-  const response = await $auth.$fetch('/api/dashboard', {
-    method: 'GET',
-  })
+  let response
+  try {
+    response = await $auth.$fetch('/api/dashboard', {
+      method: 'GET',
+    })
+  } catch (error) {
+    toast.add({
+      title: 'Error',
+      description: error.message,
+      icon: 'i-heroicons-x-circle-16-solid',
+      color: 'red',
+      timeout: 0,
+      closeButton: false,
+    })
+    satsText.value = 'Error'
+    stopPolling()
+    return
+  }
 
   title.value = `${response.name}'s Piggy Bank`
   eurText.value = `${response.eur} EUR`

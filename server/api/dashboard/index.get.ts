@@ -13,7 +13,7 @@ export const DashboardDto = z.object({
     sats: z.number(),
     comment: z.string().nullable(),
     time: z.number(),
-  }),
+  }).nullable(),
 })
 export type DashboardDto = z.infer<typeof DashboardDto>
 
@@ -21,7 +21,9 @@ export default defineLoggedInEventHandler(async (event, authUser) => {
   const user = authUser as UserSchema
   const balance = await getLnbitsBalance(user)
   const lnurlPay = await getLnbitsLnurlPay(user)
-  const payment = await getLastLnbitsPayment(user)
+  console.log('lnurlPay', lnurlPay)
+  const lastPayment = await getLastLnbitsPayment(user)
+  console.log('lastPayment', lastPayment)
   let address = null
 
   const sats = Math.floor(balance / 1000)
@@ -33,6 +35,15 @@ export default defineLoggedInEventHandler(async (event, authUser) => {
     address = `${lnurlPay.username}@${new URL(user.lnbits.url).hostname}`
   }
 
+  let payment = null
+  if (lastPayment) {
+    payment = {
+      sats: Math.floor((lastPayment.amount || 0) / 1000),
+      comment: lastPayment.comment || null,
+      time: lastPayment.time || 0,
+    }
+  }
+
   return DashboardDto.parse({
     name: user.name,
     sats,
@@ -40,11 +51,7 @@ export default defineLoggedInEventHandler(async (event, authUser) => {
     rate,
     lnurl: lnurlPay?.lnurl,
     address,
-    payment: {
-      sats: Math.floor((payment?.amount || 0) / 1000),
-      comment: payment?.comment || null,
-      time: payment?.time || 0,
-    },
+    payment,
   })
 })
 
@@ -80,7 +87,8 @@ const getLnbitsLnurlPay = async (user: UserSchema): Promise<LnUrlPayItem | null>
   })
 
   if (!response.ok) {
-    throw new Error(`Fetch error: ${response.status} ${response.statusText}`)
+    // If there are no lnurlp or extension installed it return 403
+    return null
   }
 
   const lnurlpays = LnUrlPayResponse.parse(await response.json())
