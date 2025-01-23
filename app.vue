@@ -1,6 +1,6 @@
 <template>
   <div class="font-sans flex flex-col min-h-svh">
-    <UContainer class="flex-grow">
+    <UContainer class="flex-grow px-0">
       <NuxtPage />
     </UContainer>
     <UDivider class="mt-auto pt-2" />

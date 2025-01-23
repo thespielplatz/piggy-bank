@@ -8,7 +8,7 @@
       {{ status }}
     </div>
     <div class="h-4" />
-    <div class="min-w-96 grid grid-cols-3 gap-4 p-4 bg-white shadow-md rounded-md">
+    <div class="grid grid-cols-3 gap-4 p-4 bg-white shadow-md rounded-md">
       <UButton
         v-for="data in keys"
         :key="data.key"
