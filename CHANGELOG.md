@@ -1,6 +1,34 @@
 # Changelog
 
 
+## v0.0.5
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v0.0.4...v0.0.5)
+
+### 🚀 Enhancements
+
+- Close popup on sats recieved ([2c2499b](https://github.com/thespielplatz/piggy-bank/commit/2c2499b))
+- Add notifcation on sats recieved ([aa2dfd3](https://github.com/thespielplatz/piggy-bank/commit/aa2dfd3))
+
+### 🩹 Fixes
+
+- Empty lnurlps ([45e5653](https://github.com/thespielplatz/piggy-bank/commit/45e5653))
+
+### 📦 Build
+
+- Lint no warnings ([423f660](https://github.com/thespielplatz/piggy-bank/commit/423f660))
+- Add dockerfile ([6a765ae](https://github.com/thespielplatz/piggy-bank/commit/6a765ae))
+
+### 🏡 Chore
+
+- Lint ([0c1a8d5](https://github.com/thespielplatz/piggy-bank/commit/0c1a8d5))
+- Add api in display ([1ebb203](https://github.com/thespielplatz/piggy-bank/commit/1ebb203))
+- Lint ([c87ea5d](https://github.com/thespielplatz/piggy-bank/commit/c87ea5d))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v0.0.4
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v0.0.3...v0.0.4)
