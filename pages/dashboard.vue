@@ -40,7 +40,10 @@
           Logout
         </UButton>
       </div>
-      <div v-if="payment" class="pt-1 text-xs font-bold">
+      <div
+        v-if="payment"
+        class="pt-1 text-xs font-bold"
+      >
         <UDivider label="Last Payment" />
         <div class="flex justify-between">
           <div>{{ formatTime(payment?.time) }}</div>
