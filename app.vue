@@ -3,12 +3,7 @@
     <UContainer class="flex-grow px-0">
       <NuxtPage />
     </UContainer>
-    <UDivider class="mt-auto pt-2" />
-    <UContainer class="w-full flex justify-end py-2 gap-1">
-      <GithubLink />
-      <div>|</div>
-      <VersionBadge />
-    </UContainer>
+    <TheFooter />
   </div>
   <UNotifications />
 </template>
@@ -19,4 +14,5 @@ onMounted(() => {
   document.body.classList.add('bg-background')
   document.body.classList.add('text-text')
 })
+
 </script>

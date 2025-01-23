@@ -1,12 +1,12 @@
 <template>
-  <ULink
+  <UButton
+    variant="link"
     :to="githubLink"
     target="_blank"
     class="flex items-center gap-1"
-    inactive-class="underline"
   >
     <UIcon name="i-grommet-icons-github" /> Github
-  </ULink>
+  </UButton>
 </template>
 
 <script setup lang="ts">

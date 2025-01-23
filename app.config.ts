@@ -4,5 +4,13 @@ export default defineAppConfig({
     container: {
       constrained: 'max-w-2xl',
     },
+    button: {
+      variant: {
+        link: 'underline hover:no-underline',
+      },
+      default: {
+        color: 'text',
+      },
+    },
   },
 })

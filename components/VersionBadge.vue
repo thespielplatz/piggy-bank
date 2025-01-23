@@ -1,15 +1,16 @@
 <template>
-  <ULink
+  <UButton
     :to="tagLink"
     target="_blank"
+    variant="link"
+    class="text-white"
   >
     <UBadge
       :ui="{ rounded: 'rounded-full' }"
-      class="underline"
     >
       {{ version }}
     </UBadge>
-  </ULink>
+  </UButton>
 </template>
 
 <script setup lang="ts">
