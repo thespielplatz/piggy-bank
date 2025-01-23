@@ -5,39 +5,49 @@
     </div>
     <div class="relative h-[290px] w-[384px] bg-[url('/assets/img/piggy.png')] bg-cover bg-center font-numbers ">
       <div class="absolute top-[120px] w-full -ml-2 flex flex-col justify-center">
-        <div class="text-4xl font-black flex justify-center">
+        <div class="text-3xl font-black flex justify-center">
           {{ satsText }}
         </div>
-        <div class="text-l font-bold flex justify-between px-12">
+        <div class="text-l font-bold flex justify-between px-16">
           <div>{{ rateText }}</div>
           <div>{{ eurText }}</div>
         </div>
       </div>
     </div>
-    <div class="mt-2 min-w-80 bg-white shadow-md rounded-md p-2 flex justify-between">
-      <UButton
-        icon="i-heroicons-arrow-up-tray-20-solid"
-        size="sm"
-        @click="logout"
-      >
-        Logout
-      </UButton>
-      <UButton
-        v-if="address != null"
-        icon="i-heroicons-at-symbol-16-solid"
-        size="sm"
-        @click="openPopup(address, address)"
-      >
-        Address
-      </UButton>
-      <UButton
-        v-if="lnurl != null"
-        icon="i-heroicons-arrow-down-on-square-20-solid"
-        size="sm"
-        @click="openPopup('LNURLp', lnurl)"
-      >
-        LNURLp
-      </UButton>
+    <div class="p-2 mt-2 min-w-80 bg-white shadow-md rounded-md">
+      <div class="flex justify-between">
+        <UButton
+          icon="i-heroicons-arrow-up-tray-20-solid"
+          size="sm"
+          @click="logout"
+        >
+          Logout
+        </UButton>
+        <UButton
+          v-if="address != null"
+          icon="i-heroicons-at-symbol-16-solid"
+          size="sm"
+          @click="openPopup(address, address)"
+        >
+          Address
+        </UButton>
+        <UButton
+          v-if="lnurl != null"
+          icon="i-heroicons-arrow-down-on-square-20-solid"
+          size="sm"
+          @click="openPopup('LNURLp', lnurl)"
+        >
+          LNURLp
+        </UButton>
+      </div>
+      <div class="pt-1 text-xs font-bold">
+        <UDivider label="Last Payment" />
+        <div class="flex justify-between">
+          <div>{{ formatTime(payment?.time) }}</div>
+          <div>{{ formatSats(payment?.sats) }} BTC</div>
+        </div>
+        <div v-if="payment?.comment">Message: <span class="font-normal">{{ payment?.comment }}</span></div>
+      </div>
     </div>
   </div>
   <UModal v-model="isOpen" :ui="{ width: '' }">
@@ -87,6 +97,7 @@ const sats = ref(0)
 const title = ref('Piggy Bank')
 const popupTitle = ref('')
 const popupQrCode = ref('')
+const payment = ref<{ sats: number, comment: string | null, time: number } | null>(null)
 
 const firstTime = false
 let intervalId: NodeJS.Timeout | null = null
@@ -122,9 +133,10 @@ const fetchData = async () => {
   title.value = `${response.name}'s Piggy Bank`
   eurText.value = `${response.eur} EUR`
   rateText.value = `1 BTC = ${response.rate} EUR`
-  lastUpdate.value = getCurrentTime()
+  lastUpdate.value = formatTime()
   lnurl.value = response.lnurl
   address.value = response.address
+  payment.value = response.payment
 
   if (firstTime) {
     countTo({
