@@ -167,6 +167,7 @@ const fetchData = async () => {
   payment.value = response.payment
 
   if (firstTime && response.sats > 0) {
+    lastSatsValue = response.sats
     countTo({
       ref: sats,
       endValue: response.sats,
@@ -174,6 +175,22 @@ const fetchData = async () => {
     })
   } else {
     sats.value = response.sats
+  }
+
+  firstTime = false
+
+  if (lastSatsValue != response.sats) {
+    if (isOpen.value) {
+      isOpen.value = false
+    }
+    toast.add({
+      title: response.payment?.comment || 'New Payment',
+      description: `+${response.payment?.sats} sats`,
+      icon: 'i-heroicons-currency-bitcoin-16-solid',
+      color: 'green',
+      timeout: 2000,
+    })
+    lastSatsValue = response.sats
   }
 }
 
