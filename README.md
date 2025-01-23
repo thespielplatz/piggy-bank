@@ -26,7 +26,8 @@ A small piggybank for pre coiners and run by their custodian.
 
 ## Roadmap
 
-- t.b.d.
+- OnChain
+- Connect to Hardware
 
 ## Configuration
 
