@@ -1,10 +1,25 @@
 <template>
   <UDivider class="mt-auto pt-2" />
   <UContainer class="w-full flex justify-end py-2 gap-">
-    <UButton v-if="imprintContent != null" @click="isOpen = true" variant="link">Imprint</UButton>
-    <UDivider v-if="imprintContent != null" orientation="vertical" :ui="{ border: { base: 'border-text' }}" class="h-7 mt-1" />
+    <UButton
+      v-if="imprintContent != null"
+      variant="link"
+      @click="isOpen = true"
+    >
+      Imprint
+    </UButton>
+    <UDivider
+      v-if="imprintContent != null"
+      orientation="vertical"
+      :ui="{ border: { base: 'border-text' } }"
+      class="h-7 mt-1"
+    />
     <GithubLink />
-    <UDivider orientation="vertical" :ui="{ border: { base: 'border-text' }}" class="h-7 mt-1" />
+    <UDivider
+      orientation="vertical"
+      :ui="{ border: { base: 'border-text' } }"
+      class="h-7 mt-1"
+    />
     <VersionBadge />
   </UContainer>
   <UModal v-model="isOpen">
@@ -14,11 +29,18 @@
           <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
             Imprint
           </h3>
-          <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="isOpen = false" />
+          <UButton
+            color="gray"
+            variant="ghost"
+            icon="i-heroicons-x-mark-20-solid"
+            class="-my-1"
+            @click="isOpen = false"
+          />
         </div>
       </template>
       <template #default>
-        <div v-html="imprintContent"></div>
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <div v-html="imprintContent" />
       </template>
     </UCard>
   </UModal>
@@ -36,6 +58,7 @@ onMounted(async () => {
     })
     imprintContent.value = response
   } catch {
+    imprintContent.value = null
   }
 })
 
