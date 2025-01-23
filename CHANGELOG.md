@@ -1,6 +1,35 @@
 # Changelog
 
 
+## v0.0.3
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v0.0.2...v0.0.3)
+
+### 🚀 Enhancements
+
+- Add name to piggy bank ([157dcfb](https://github.com/thespielplatz/piggy-bank/commit/157dcfb))
+- Add lnurlp / lnaddress ([cb67906](https://github.com/thespielplatz/piggy-bank/commit/cb67906))
+- Display eur rate and eur value ([abd2bb3](https://github.com/thespielplatz/piggy-bank/commit/abd2bb3))
+- Show lnurlp popup ([3e59c18](https://github.com/thespielplatz/piggy-bank/commit/3e59c18))
+- Show address ([eefaad8](https://github.com/thespielplatz/piggy-bank/commit/eefaad8))
+- Add 5 sec polling ([1e5957e](https://github.com/thespielplatz/piggy-bank/commit/1e5957e))
+- Add last payment, incl. comment ([0fd6568](https://github.com/thespielplatz/piggy-bank/commit/0fd6568))
+
+### 📖 Documentation
+
+- Add config.json example ([5efe2fb](https://github.com/thespielplatz/piggy-bank/commit/5efe2fb))
+- Update features ([b5d2798](https://github.com/thespielplatz/piggy-bank/commit/b5d2798))
+
+### 🏡 Chore
+
+- Change name in example ([6c4b703](https://github.com/thespielplatz/piggy-bank/commit/6c4b703))
+- Change numbers font to tektur ([471e79a](https://github.com/thespielplatz/piggy-bank/commit/471e79a))
+- Eslint ([d60f4d6](https://github.com/thespielplatz/piggy-bank/commit/d60f4d6))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v0.0.2
 
 
