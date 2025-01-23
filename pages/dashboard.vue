@@ -110,7 +110,9 @@ const popupTitle = ref('')
 const popupQrCode = ref('')
 const payment = ref<{ sats: number, comment: string | null, time: number } | null>(null)
 
-const firstTime = false
+let lastSatsValue = 0
+
+let firstTime = true
 let intervalId: NodeJS.Timeout | null = null
 
 onMounted(async () => {
