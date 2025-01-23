@@ -21,6 +21,8 @@ A small piggybank for pre coiners and run by their custodian.
 - Show LNURLp (the first one via LNBits API will be chosen)
 - Show LN Address
 - polling
+- Show notification on payment recieved
+- Close LNURL popups on payment recieved
 
 ## Roadmap
 
