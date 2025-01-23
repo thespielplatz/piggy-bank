@@ -46,11 +46,16 @@
           <div>{{ formatTime(payment?.time) }}</div>
           <div>{{ formatSats(payment?.sats) }} BTC</div>
         </div>
-        <div v-if="payment?.comment">Message: <span class="font-normal">{{ payment?.comment }}</span></div>
+        <div v-if="payment?.comment">
+          Message: <span class="font-normal">{{ payment?.comment }}</span>
+        </div>
       </div>
     </div>
   </div>
-  <UModal v-model="isOpen" :ui="{ width: '' }">
+  <UModal
+    v-model="isOpen"
+    :ui="{ width: '' }"
+  >
     <UCard
       :ui="{
         base: 'h-full flex flex-col',
@@ -75,8 +80,12 @@
           />
         </div>
       </template>
-      <!-- // eslint-disable-next-line vue/no-v-html -->
-      <div v-html="popupQrCode" class="flex justify-center" />
+      <!-- eslint-disable vue/no-v-html -->
+      <div
+        class="flex justify-center"
+        v-html="popupQrCode"
+      />
+      <!-- eslint-enable vue/no-v-html -->
     </UCard>
   </UModal>
 </template>
