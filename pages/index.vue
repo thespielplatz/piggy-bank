@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-col items-center justify-center">
-    <div class="text-center font-heading font-bold text-6xl py-10">
-      Piggy Bank
+    <div class="text-center font-heading font-bold text-6xl py-10 flex items-center">
+      <UIcon name="i-material-symbols-electric-bolt-rounded" class="-ml-3" />
+      <div>Piggy Bank</div>
     </div>
-    <div class="h-4" />
-    <div class="bg-white min-w-96 h-14 pt-2 shadow-md rounded-md text-center font-bold font-mono text-4xl">
+    <div class="bg-white min-w-96 h-14 pt-1 shadow-md rounded-md text-center font-bold font-mono text-4xl">
       {{ status }}
     </div>
     <div class="h-4" />
