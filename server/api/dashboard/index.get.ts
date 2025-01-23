@@ -21,9 +21,7 @@ export default defineLoggedInEventHandler(async (event, authUser) => {
   const user = authUser as UserSchema
   const balance = await getLnbitsBalance(user)
   const lnurlPay = await getLnbitsLnurlPay(user)
-  console.log('lnurlPay', lnurlPay)
   const lastPayment = await getLastLnbitsPayment(user)
-  console.log('lastPayment', lastPayment)
   let address = null
 
   const sats = Math.floor(balance / 1000)
@@ -49,7 +47,7 @@ export default defineLoggedInEventHandler(async (event, authUser) => {
     sats,
     eur,
     rate,
-    lnurl: lnurlPay?.lnurl,
+    lnurl: lnurlPay?.lnurl || null,
     address,
     payment,
   })

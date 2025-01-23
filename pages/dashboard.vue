@@ -104,7 +104,7 @@ const rateText = ref('')
 const lnurl = ref<string | null>()
 const address = ref<string | null>()
 const lastUpdate = ref('')
-const sats = ref(0)
+const sats = ref(-1)
 const title = ref('Piggy Bank')
 const popupTitle = ref('')
 const popupQrCode = ref('')
@@ -164,7 +164,7 @@ const fetchData = async () => {
   address.value = response.address
   payment.value = response.payment
 
-  if (firstTime) {
+  if (firstTime && response.sats > 0) {
     countTo({
       ref: sats,
       endValue: response.sats,
