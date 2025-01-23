@@ -1,12 +1,16 @@
 <template>
-  <div class="font-sans">
-    <UContainer>
-      <div class="px-2">
-        <NuxtPage />
-      </div>
+  <div class="font-sans flex flex-col min-h-svh">
+    <UContainer class="flex-grow">
+      <NuxtPage />
     </UContainer>
-    <UNotifications />
+    <UDivider class="mt-auto pt-2" />
+    <UContainer class="w-full flex justify-end py-2 gap-1">
+      <GithubLink />
+      <div>|</div>
+      <VersionBadge />
+    </UContainer>
   </div>
+  <UNotifications />
 </template>
 
 <script setup lang="ts">

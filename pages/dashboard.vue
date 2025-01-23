@@ -17,13 +17,6 @@
     <div class="p-2 mt-2 min-w-80 bg-white shadow-md rounded-md">
       <div class="flex justify-between">
         <UButton
-          icon="i-heroicons-arrow-up-tray-20-solid"
-          size="sm"
-          @click="logout"
-        >
-          Logout
-        </UButton>
-        <UButton
           v-if="address != null"
           icon="i-heroicons-at-symbol-16-solid"
           size="sm"
@@ -38,6 +31,13 @@
           @click="openPopup('LNURLp', lnurl)"
         >
           LNURLp
+        </UButton>
+        <UButton
+          icon="i-heroicons-arrow-up-tray-20-solid"
+          size="sm"
+          @click="logout"
+        >
+          Logout
         </UButton>
       </div>
       <div class="pt-1 text-xs font-bold">

@@ -2,6 +2,7 @@
   "name": "piggy-bank",
   "version": "0.0.3",
   "type": "module",
+  "homepage": "https://github.com/thespielplatz/piggy-bank",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
