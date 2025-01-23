@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.1.0
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.0.0...v1.1.0)
+
+### 🚀 Enhancements
+
+- Add optional imprint ([121dfd1](https://github.com/thespielplatz/piggy-bank/commit/121dfd1))
+
+### 🏡 Chore
+
+- Lint ([2dab34d](https://github.com/thespielplatz/piggy-bank/commit/2dab34d))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v0.0.5
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v0.0.4...v0.0.5)
