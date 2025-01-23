@@ -4,6 +4,7 @@
     :to="githubLink"
     target="_blank"
     class="flex items-center gap-1"
+    color="astronaut-blue"
   >
     <UIcon name="i-grommet-icons-github" /> Github
   </UButton>

@@ -4,6 +4,7 @@
     <UButton
       v-if="imprintContent != null"
       variant="link"
+      color="astronaut-blue"
       @click="isOpen = true"
     >
       Imprint

@@ -8,9 +8,6 @@ export default defineAppConfig({
       variant: {
         link: 'underline hover:no-underline',
       },
-      default: {
-        color: 'text',
-      },
     },
   },
 })
