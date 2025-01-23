@@ -1,6 +1,30 @@
 # Changelog
 
 
+## v0.0.4
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v0.0.3...v0.0.4)
+
+### 🚀 Enhancements
+
+- Add github and release into footer ([79d63d8](https://github.com/thespielplatz/piggy-bank/commit/79d63d8))
+
+### 🩹 Fixes
+
+- Adjust mobile layout ([1084bd5](https://github.com/thespielplatz/piggy-bank/commit/1084bd5))
+
+### 📦 Build
+
+- Add github pipeline file ([85e4b53](https://github.com/thespielplatz/piggy-bank/commit/85e4b53))
+
+### 🏡 Chore
+
+- Add lightning logo to headline ([241898b](https://github.com/thespielplatz/piggy-bank/commit/241898b))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v0.0.3
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v0.0.2...v0.0.3)
