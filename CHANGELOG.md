@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.1.1
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.1.0...v1.1.1)
+
+### 🩹 Fixes
+
+- Button colors ([d6203b5](https://github.com/thespielplatz/piggy-bank/commit/d6203b5))
+
+### 💅 Refactors
+
+- Change error according to nuxt server docs ([10dc5dd](https://github.com/thespielplatz/piggy-bank/commit/10dc5dd))
+- Rename imprint to legal notice ([34095cd](https://github.com/thespielplatz/piggy-bank/commit/34095cd))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.1.0
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.0.0...v1.1.0)
