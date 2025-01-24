@@ -94,7 +94,10 @@
 </template>
 
 <script setup lang="ts">
+
 import QRCode from 'qrcode-svg'
+
+const POLLING_INTERVAL = 2000
 
 const { $auth } = useNuxtApp()
 const toast = useToast()
@@ -129,7 +132,7 @@ onUnmounted(async () => {
 
 const startPolling = () => {
   if (!intervalId) {
-    intervalId = setInterval(fetchData, 5000)
+    intervalId = setInterval(fetchData, POLLING_INTERVAL)
     fetchData()
   }
 }
