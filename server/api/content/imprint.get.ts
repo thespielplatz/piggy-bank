@@ -14,7 +14,10 @@ export default defineEventHandler(async (event): Promise<string> => {
   }
 
   if (fileContent === false) {
-    throw new Error('Imprint not found')
+    throw createError({
+      statusCode: 404,
+      statusMessage: 'Legal notice not set!',
+    })
   }
 
   setHeader(event, 'Content-Type', 'text/html')
