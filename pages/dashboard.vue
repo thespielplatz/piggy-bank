@@ -151,18 +151,20 @@ const fetchData = async () => {
       method: 'GET',
     })
   } catch (error) {
-    toast.add({
-      title: 'Error',
-      description: error.message,
-      icon: 'i-heroicons-x-circle-16-solid',
-      color: 'red',
-      timeout: 0,
-      closeButton: false,
-    })
-    satsText.value = 'Error'
-    stopPolling()
-    return
-  }
+    if (firstTime) {
+      toast.add({
+        title: 'Error',
+        description: error.message,
+        icon: 'i-heroicons-x-circle-16-solid',
+        color: 'red',
+        timeout: 0,
+        closeButton: false,
+      })
+      satsText.value = 'Error'
+      stopPolling()
+      return
+    }
+}
 
   title.value = `${response.name}'s Piggy Bank`
   eurText.value = `${response.eur} EUR`
