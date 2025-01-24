@@ -177,7 +177,7 @@ const fetchData = async () => {
       stopPolling()
       return
     }
-}
+  }
 
   title.value = `${response.name}'s`
   eurText.value = `${response.eur} EUR`
