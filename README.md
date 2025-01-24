@@ -1,43 +1,35 @@
 # Piggy Bank
 
-A small piggybank for pre coiners and run by their custodian.
+[![Version](https://img.shields.io/github/package-json/v/thespielplatz/piggy-bank?color=F7941E)](https://github.com/thespielplatz/piggy-bank/)
+[![License](https://img.shields.io/github/license/thespielplatz/piggy-bank?color=F7941E)](https://github.com/thespielplatz/piggy-bank/blob/main/LICENSE)
+[![Stars](https://img.shields.io/github/stars/thespielplatz/piggy-bank.svg?style=flat&color=F7941E)](https://github.com/thespielplatz/piggy-bank/stargazers)
 
-<p>
-  <a href="https://github.com/thespielplatz/piggy-bank/">
-    <img src="https://img.shields.io/github/package-json/v/thespielplatz/piggy-bank?color=F7941E" alt="Version">
-  </a>
-  <a href="https://github.com/thespielplatz/piggy-bank/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/thespielplatz/piggy-bank?color=F7941E" alt="Licence">
-  </a>
-  <a href="https://github.com/thespielplatz/piggy-bank/stargazers">
-    <img src="https://img.shields.io/github/stars/thespielplatz/piggy-bank.svg?style=flat&color=F7941E" alt="Stars">
-  </a>
-</p>
+A small piggy bank for pre-coiners, managed by their custodian.
 
 ## Features
 
-- add a lnbits account to view behind a pincode
-- view only
-- Show LNURLp (the first one via LNBits API will be chosen)
-- Show LN Address
-- polling
-- Show notification on payment recieved
-- Close LNURL popups on payment recieved
+- **View Satoshis Balance**: Displays the amount of sats in an LNBits account, accessible via a PIN code.
+- **LNURLp Integration**: Displays the first LNURL-pay link from the LNBits API, if available.
+- **LN Address Display**: Optionally shows the LN address, if configured.
+- **Payment Notifications**: Sends notifications upon payment receipt.
+- **Automatic LNURL Recognition**: Reads and displays LNURL-pay extension links if configured.
+- **Dynamic Buttons**: Displays an `@ Address` button if a username is set in the extension.
+- **Popup Closure**: Automatically closes LNURL popups upon payment receipt.
 
 ## Roadmap
 
-- OnChain
-- Connect to Hardware
+- **OnChain Support**: Enable on-chain payments.
+- **Hardware Connectivity**: Integrate with a piggy bank hardware.
 
 ## Configuration
 
-Create a `config.json`. Example:
+Create a `config.json` file. Example configuration:
 
 ```json
 {
   "users": [
     {
-      "id": "justAnRandomString",
+      "id": "justARandomString",
       "name": "John Doe",
       "accessKey": "333",
       "lnbits": {
@@ -49,24 +41,34 @@ Create a `config.json`. Example:
 }
 ```
 
-### Lnbits
+## Development Setup
 
-The app automatically reads all LNURL-pay extension links. If there are none, no LNURLp is shown. If there is even a username set in the extension
-a seond button will appear with `@ Address`.
+1. Install dependencies:
 
-## Dev
+   ```bash
+   npm install
+   ```
 
-```bash
-npm i
-nano config.json
-# copy the example and adjust lnbits account
-npm run dev
-```
+2. Create and edit the configuration file:
 
-Access the piggy bank with 333 aka `DEV`
+   ```bash
+   nano config.json
+   ```
+
+   Copy the example configuration above and adjust the LNBits account details.
+
+3. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+4. Access the piggy bank using the configured PIN code (e.g., `333` for `DEV`).
 
 ## Support
 
-If you like this project, give it a star! If you love it, fork it and take it out for dinner. 🌟🍽️ 
+If you like this project, give it a star! 🌟 If you love it, fork it and take it out for dinner. 🍽️
 
-And hey, why not [send some tip love?](https://thespielplatz.com/tip-jar)
+Feeling generous? Why not [send a tip](https://thespielplatz.com/tip-jar) to support the project? 💖
+
+Thank you for using Piggy Bank! 🎉
