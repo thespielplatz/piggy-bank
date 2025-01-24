@@ -11,13 +11,19 @@
       </div>
     </div>
     <div class="relative h-[290px] w-[384px] bg-[url('/assets/img/piggy.png')] bg-cover bg-center font-numbers ">
-      <div class="absolute top-[120px] w-full -ml-2 flex flex-col justify-center">
-        <div class="text-3xl font-black flex justify-center">
-          {{ satsText }}
-        </div>
-        <div class="text-l font-bold flex justify-between px-16">
-          <div>{{ rateText }}</div>
-          <div>{{ eurText }}</div>
+      <div class="absolute top-[120px] w-80 ml-6 flex flex-col justify-center">
+        <div class="flex justify-center">
+          <div class="flex flex-col items-end">
+            <div class="text-3xl font-black">
+              {{ satsText }}
+            </div>
+            <div class="text-sm font-bold">
+              {{ rateText }}
+            </div>
+            <div class="text-sm font-bold">
+              {{ eurText }}
+            </div>
+          </div>
         </div>
       </div>
     </div>
