@@ -2,15 +2,15 @@
   <UDivider class="mt-auto pt-2" />
   <UContainer class="w-full flex justify-end py-2 gap-">
     <UButton
-      v-if="imprintContent != null"
+      v-if="legalNoticeContent != null"
       variant="link"
       color="astronaut-blue"
       @click="isOpen = true"
     >
-      Imprint
+      Legal Notice
     </UButton>
     <UDivider
-      v-if="imprintContent != null"
+      v-if="legalNoticeContent != null"
       orientation="vertical"
       :ui="{ border: { base: 'border-text' } }"
       class="h-7 mt-1"
@@ -28,7 +28,7 @@
       <template #header>
         <div class="flex items-center justify-between">
           <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
-            Imprint
+            Legal Notice
           </h3>
           <UButton
             color="gray"
@@ -41,7 +41,7 @@
       </template>
       <template #default>
         <!-- eslint-disable-next-line vue/no-v-html -->
-        <div v-html="imprintContent" />
+        <div v-html="legalNoticeContent" />
       </template>
     </UCard>
   </UModal>
@@ -49,17 +49,17 @@
 
 <script setup lang="ts">
 
-const imprintContent = ref<null | string>(null)
+const legalNoticeContent = ref<null | string>(null)
 
 const isOpen = ref(false)
 onMounted(async () => {
   try {
-    const response = await $fetch('/api/content/imprint', {
+    const response = await $fetch('/api/content/legal-notice', {
       method: 'GET',
     })
-    imprintContent.value = response
+    legalNoticeContent.value = response
   } catch {
-    imprintContent.value = null
+    legalNoticeContent.value = null
   }
 })
 

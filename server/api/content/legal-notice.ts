@@ -6,7 +6,7 @@ let fileContent: string | false | null = null
 export default defineEventHandler(async (event): Promise<string> => {
   if (fileContent == null) {
     try {
-      const filePath = resolve(process.cwd(), 'data/imprint.html')
+      const filePath = resolve(process.cwd(), 'data/legal-notice.html')
       fileContent = await fs.readFile(filePath, 'utf-8')
     } catch {
       fileContent = false
