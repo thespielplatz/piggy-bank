@@ -1,6 +1,32 @@
 # Changelog
 
 
+## v1.1.2
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.1.1...v1.1.2)
+
+### 🩹 Fixes
+
+- Only stop polling on the first time the piggy banke is opened ([d03bbca](https://github.com/thespielplatz/piggy-bank/commit/d03bbca))
+
+### 💅 Refactors
+
+- Change polling interval to 2sec ([1c7215d](https://github.com/thespielplatz/piggy-bank/commit/1c7215d))
+
+### 📖 Documentation
+
+- Update readme ([b7a72e1](https://github.com/thespielplatz/piggy-bank/commit/b7a72e1))
+
+### 🏡 Chore
+
+- Add lightning symbol to header ([c733496](https://github.com/thespielplatz/piggy-bank/commit/c733496))
+- Update piggy layout ([4c8eeaa](https://github.com/thespielplatz/piggy-bank/commit/4c8eeaa))
+- Lint ([42e70db](https://github.com/thespielplatz/piggy-bank/commit/42e70db))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.1.1
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.1.0...v1.1.1)
