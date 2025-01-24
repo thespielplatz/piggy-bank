@@ -1,7 +1,14 @@
 <template>
   <div class="flex flex-col items-center justify-center">
     <div class="text-center font-heading font-bold text-6xl pt-10 pb-6">
-      {{ title }}
+      <div>{{ title }}</div>
+      <div class="flex justify-center">
+        <UIcon
+          name="i-material-symbols-electric-bolt-rounded"
+          class="-ml-3 mt-1"
+        />
+        <div>Piggy Bank</div>
+      </div>
     </div>
     <div class="relative h-[290px] w-[384px] bg-[url('/assets/img/piggy.png')] bg-cover bg-center font-numbers ">
       <div class="absolute top-[120px] w-full -ml-2 flex flex-col justify-center">
@@ -111,7 +118,7 @@ const lnurl = ref<string | null>()
 const address = ref<string | null>()
 const lastUpdate = ref('')
 const sats = ref(-1)
-const title = ref('Piggy Bank')
+const title = ref('')
 const popupTitle = ref('')
 const popupQrCode = ref('')
 const payment = ref<{ sats: number, comment: string | null, time: number } | null>(null)
@@ -166,7 +173,7 @@ const fetchData = async () => {
     }
 }
 
-  title.value = `${response.name}'s Piggy Bank`
+  title.value = `${response.name}'s`
   eurText.value = `${response.eur} EUR`
   rateText.value = `1 BTC = ${response.rate} EUR`
   lastUpdate.value = formatTime()

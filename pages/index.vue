@@ -3,7 +3,7 @@
     <div class="text-center font-heading font-bold text-6xl py-10 flex items-center">
       <UIcon
         name="i-material-symbols-electric-bolt-rounded"
-        class="-ml-3"
+        class="-ml-3 mt-1"
       />
       <div>Piggy Bank</div>
     </div>
