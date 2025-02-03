@@ -6,6 +6,10 @@
 
 A small piggy bank for pre-coiners, managed by their custodian.
 
+| **Homepage** | **Piggy Bank** | **Payment** |
+|---|---|---|
+| <img src="docs/img/homepage.png" alt="Homepage" height="250px"> | <img src="docs/img/piggy.png" alt="Piggy Bank" height="250px"> | <img src="docs/img/lnurlp.png" alt="Payment" height="250px"> |
+
 ## Features
 
 - **View Satoshis Balance**: Displays the amount of sats in an LNBits account, accessible via a PIN code.
@@ -31,7 +35,7 @@ Create a `config.json` file. Example configuration:
     {
       "id": "justARandomString",
       "name": "John Doe",
-      "accessKey": "333",
+      "accessKey": "338",
       "lnbits": {
         "url": "https://your.lnbits.com",
         "invoiceKey": "6843498d6bbd4452b5853f7abdc3dac9"
@@ -63,7 +67,7 @@ Create a `config.json` file. Example configuration:
    npm run dev
    ```
 
-4. Access the piggy bank using the configured PIN code (e.g., `333` for `DEV`).
+4. Access the piggy bank using the configured PIN code (e.g., `338` for `DEV`).
 
 ## Support
 
