@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.1.3
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.1.2...v1.1.3)
+
+### 📖 Documentation
+
+- Add screenshots ([aec597b](https://github.com/thespielplatz/piggy-bank/commit/aec597b))
+
+### 🤖 CI
+
+- Change docker build from tag push to release ([e06bb35](https://github.com/thespielplatz/piggy-bank/commit/e06bb35))
+- Change script name to bump-version ([ed657c7](https://github.com/thespielplatz/piggy-bank/commit/ed657c7))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.1.2
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.1.1...v1.1.2)
