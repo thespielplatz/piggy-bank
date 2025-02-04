@@ -10,7 +10,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint . --max-warnings=0",
-    "bump-patch": "npm run lint && npx changelogen@latest --release && git push --follow-tags"
+    "bump-version": "npm run lint && npx changelogen@latest --release && git push --follow-tags"
   },
   "dependencies": {
     "@nuxt/ui": "^2.21.0",
