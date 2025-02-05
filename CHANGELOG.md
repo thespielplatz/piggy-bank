@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.2.2
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.1...v1.2.2)
+
+### 🩹 Fixes
+
+- Remove " from html ([7bc7a34](https://github.com/thespielplatz/piggy-bank/commit/7bc7a34))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.2.1
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.0...v1.2.1)
