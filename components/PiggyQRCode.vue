@@ -1,7 +1,6 @@
 <template>
   <!-- eslint-disable vue/no-v-html -->
   <div
-    class="absolute top-[65px] w-80 ml-8 flex justify-center"
     v-html="printQrCode"
   />
   <!-- eslint-enable vue/no-v-html -->
