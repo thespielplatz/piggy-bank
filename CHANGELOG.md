@@ -1,6 +1,26 @@
 # Changelog
 
 
+## v1.2.0
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.1.3...v1.2.0)
+
+### 🚀 Enhancements
+
+- **dashboard:** Add print layout incl. QR Code for give away ([8fa6b81](https://github.com/thespielplatz/piggy-bank/commit/8fa6b81))
+
+### 📖 Documentation
+
+- **print:** Add print feature description ([6e69ce6](https://github.com/thespielplatz/piggy-bank/commit/6e69ce6))
+
+### 🏡 Chore
+
+- **lint:** Add v-html exception for qr code div ([569c2e1](https://github.com/thespielplatz/piggy-bank/commit/569c2e1))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.1.3
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.1.2...v1.1.3)
