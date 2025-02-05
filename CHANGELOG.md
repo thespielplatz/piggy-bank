@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.2.1
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.0...v1.2.1)
+
+### 🩹 Fixes
+
+- **print:** Change print: to flex and refactor classes to dashboard ([ae8609c](https://github.com/thespielplatz/piggy-bank/commit/ae8609c))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.2.0
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.1.3...v1.2.0)
