@@ -19,6 +19,7 @@ A small piggy bank for pre-coiners, managed by their custodian.
 - **Automatic LNURL Recognition**: Reads and displays LNURL-pay extension links if configured.
 - **Dynamic Buttons**: Displays an `@ Address` button if a username is set in the extension.
 - **Popup Closure**: Automatically closes LNURL popups upon payment receipt.
+- **Print**: Print a users dashboard to have a give away QR Code
 
 ## Roadmap
 
@@ -44,6 +45,11 @@ Create a `config.json` file. Example configuration:
   ]
 }
 ```
+
+## Give away
+
+- Goto the users piggy bank
+- Print the page
 
 ## Development Setup
 
