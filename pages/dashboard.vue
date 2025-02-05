@@ -11,7 +11,8 @@
       </div>
     </div>
     <div class="relative h-[290px] w-[384px] bg-[url('/assets/img/piggy.png')] bg-cover bg-center font-numbers ">
-      <div class="absolute top-[120px] w-80 ml-6 flex flex-col justify-center">
+      <PiggyQRCode class="hidden print:visible" />
+      <div class="absolute top-[120px] w-80 ml-6 flex flex-col justify-center print:hidden">
         <div class="flex justify-center">
           <div class="flex flex-col items-end">
             <div class="text-3xl font-black">
@@ -27,8 +28,16 @@
         </div>
       </div>
     </div>
-    <div class="p-2 mt-2 min-w-80 bg-white shadow-md rounded-md">
+    <div class="p-2 mt-2 min-w-80 bg-white shadow-md rounded-md print:hidden">
       <div class="flex justify-between">
+        <UButton
+          v-if="lnurl != null"
+          icon="i-heroicons-arrow-down-on-square-20-solid"
+          size="sm"
+          @click="openPopup('LNURLp', lnurl)"
+        >
+          Deposit
+        </UButton>
         <UButton
           v-if="address != null"
           icon="i-heroicons-at-symbol-16-solid"
@@ -36,14 +45,6 @@
           @click="openPopup(address, address)"
         >
           Address
-        </UButton>
-        <UButton
-          v-if="lnurl != null"
-          icon="i-heroicons-arrow-down-on-square-20-solid"
-          size="sm"
-          @click="openPopup('LNURLp', lnurl)"
-        >
-          LNURLp
         </UButton>
         <UButton
           icon="i-heroicons-arrow-up-tray-20-solid"
@@ -127,6 +128,7 @@ const sats = ref(-1)
 const title = ref('')
 const popupTitle = ref('')
 const popupQrCode = ref('')
+
 const payment = ref<{ sats: number, comment: string | null, time: number } | null>(null)
 
 let lastSatsValue = 0

@@ -3,7 +3,9 @@
     <UContainer class="flex-grow px-0">
       <NuxtPage />
     </UContainer>
-    <TheFooter />
+    <div class="print:hidden">
+      <TheFooter />
+    </div>
   </div>
   <UNotifications />
 </template>
