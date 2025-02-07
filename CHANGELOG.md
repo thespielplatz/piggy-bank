@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.2.3
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.2...v1.2.3)
+
+### 🩹 Fixes
+
+- **print:** Invert QR Code colors ([17e2d12](https://github.com/thespielplatz/piggy-bank/commit/17e2d12))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.2.2
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.1...v1.2.2)
