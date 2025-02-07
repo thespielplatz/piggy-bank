@@ -18,8 +18,8 @@ onMounted(async () => {
     padding: 0,
     width: 175,
     height: 175,
-    color: '#f8a394',
-    background: '#1e4563',
+    color: '#1e4563',
+    background: '#f8a394',
   }).svg()
 })
 
