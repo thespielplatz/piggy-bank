@@ -3,11 +3,12 @@
     <div class="text-center font-heading font-bold text-6xl pt-10 pb-6">
       <div>{{ title }}</div>
       <div class="flex justify-center">
-        <UIcon
-          name="i-material-symbols-electric-bolt-rounded"
-          class="-ml-3 mt-1"
-        />
-        <div>Piggy Bank</div>
+        <div>
+          <UIcon
+            name="i-uil-bitcoin"
+            class="text-7xl -mb-4 -mr-3"
+          />
+          Piggy Bank</div>
       </div>
     </div>
     <div class="relative h-[290px] w-[384px] bg-[url('/img/piggy.png')] bg-cover bg-center font-numbers ">

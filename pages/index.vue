@@ -1,10 +1,12 @@
 <template>
   <div class="flex flex-col items-center justify-center">
-    <div class="text-center font-heading font-bold text-6xl py-10 flex items-center">
-      <UIcon
-        name="i-material-symbols-electric-bolt-rounded"
-        class="-ml-3 mt-1"
-      />
+    <div class="text-center font-heading font-bold text-6xl py-10 flex flex-col items-center">
+      <div>
+        <UIcon
+          name="i-uil-bitcoin"
+          class="-mb-4 text-7xl"
+        />itcoin
+      </div>
       <div>Piggy Bank</div>
     </div>
     <div class="bg-white min-w-96 h-14 pt-1 shadow-md rounded-md text-center font-bold font-mono text-4xl">
@@ -38,6 +40,8 @@
       </UButton>
     </div>
   </div>
+  <div class="h-2" />
+  <div class="text-center text-xs font-bold">Powered by <UIcon name="i-bitcoin-icons-lightning-filled" class="text-lg -mb-1" />Lightning</div>
 </template>
 
 <script setup lang="ts">
