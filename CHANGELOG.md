@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.2.5
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.4...v1.2.5)
+
+### 🏡 Chore
+
+- Change logo from lightning to bitcoin ([d24fea0](https://github.com/thespielplatz/piggy-bank/commit/d24fea0))
+- Lint fix ([8328634](https://github.com/thespielplatz/piggy-bank/commit/8328634))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.2.4
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.3...v1.2.4)
