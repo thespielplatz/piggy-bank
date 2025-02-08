@@ -30,5 +30,8 @@ export default defineNuxtConfig({
       githubLink: packageJsonTyped.homepage,
     },
   },
+  experimental: {
+    appManifest: false,
+  },
   compatibilityDate: '2024-11-01',
 })
