@@ -8,7 +8,8 @@
             name="i-uil-bitcoin"
             class="text-7xl -mb-4 -mr-3"
           />
-          Piggy Bank</div>
+          Piggy Bank
+        </div>
       </div>
     </div>
     <div class="relative h-[290px] w-[384px] bg-[url('/img/piggy.png')] bg-cover bg-center font-numbers ">

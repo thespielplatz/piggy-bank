@@ -41,7 +41,12 @@
     </div>
   </div>
   <div class="h-2" />
-  <div class="text-center text-xs font-bold">Powered by <UIcon name="i-bitcoin-icons-lightning-filled" class="text-lg -mb-1" />Lightning</div>
+  <div class="text-center text-xs font-bold">
+    Powered by <UIcon
+      name="i-bitcoin-icons-lightning-filled"
+      class="text-lg -mb-1"
+    />Lightning
+  </div>
 </template>
 
 <script setup lang="ts">
