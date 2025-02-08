@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.2.4
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.3...v1.2.4)
+
+### 🩹 Fixes
+
+- Move piggy.png to public folder ([f2bea05](https://github.com/thespielplatz/piggy-bank/commit/f2bea05))
+- Turn off experimental feature of appManifest ([2c13067](https://github.com/thespielplatz/piggy-bank/commit/2c13067))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.2.3
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.2...v1.2.3)
