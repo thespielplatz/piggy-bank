@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.2.9
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.8...v1.2.9)
+
+### 🏡 Chore
+
+- Update of nuxt-dev-base ([fc5960e](https://github.com/thespielplatz/piggy-bank/commit/fc5960e))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.2.8
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.7...v1.2.8)
