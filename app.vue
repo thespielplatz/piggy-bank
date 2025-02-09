@@ -4,7 +4,7 @@
       <NuxtPage />
     </UContainer>
     <div class="print:hidden">
-      <TheFooter />
+      <FooterMain />
     </div>
   </div>
   <UNotifications />
