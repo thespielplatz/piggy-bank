@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.2.6
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.5...v1.2.6)
+
+### 💅 Refactors
+
+- Use nuxt-dev-base i/o of local components ([8cc2212](https://github.com/thespielplatz/piggy-bank/commit/8cc2212))
+
+### 🏡 Chore
+
+- Npm audit fix ([28570cc](https://github.com/thespielplatz/piggy-bank/commit/28570cc))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.2.5
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.4...v1.2.5)
