@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.2.8
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.7...v1.2.8)
+
+### 🏡 Chore
+
+- Move nuxt modules to dependencies section ([d7c5315](https://github.com/thespielplatz/piggy-bank/commit/d7c5315))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.2.7
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.6...v1.2.7)
