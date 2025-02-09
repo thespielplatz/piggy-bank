@@ -22,7 +22,7 @@
   "devDependencies": {
     "@nuxt/eslint-config": "^1.0.1",
     "@thespielplatz/nuxt-auth": "^1.0.0",
-    "@thespielplatz/nuxt-dev-base": "^1.0.0",
+    "@thespielplatz/nuxt-dev-base": "^1.0.1",
     "@types/qrcode-svg": "^1.1.5",
     "changelogen": "^0.5.7",
     "eslint": "^9.20.0"
