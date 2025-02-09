@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.2.7
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.6...v1.2.7)
+
+### 🏡 Chore
+
+- Update of nuxt-dev-base ([4853bcd](https://github.com/thespielplatz/piggy-bank/commit/4853bcd))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.2.6
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.5...v1.2.6)
