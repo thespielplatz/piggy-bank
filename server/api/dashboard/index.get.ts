@@ -1,6 +1,7 @@
 import z from 'zod'
 import type { UserSchema } from '~/server/domain/config'
 import getKrakenBtcRate from '~/server/utils/getKrakenBtcRate'
+import LnBits from '~/server/utils/LnBits'
 
 export const DashboardDto = z.object({
   name: z.string(),
@@ -19,18 +20,24 @@ export type DashboardDto = z.infer<typeof DashboardDto>
 
 export default defineLoggedInEventHandler(async (event, authUser) => {
   const user = authUser as UserSchema
-  const balance = await getLnbitsBalance(user)
-  const lnurlPay = await getLnbitsLnurlPay(user)
-  const lastPayment = await getLastLnbitsPayment(user)
-  let address = null
+  const lnbits = new LnBits({
+    apiKey: user.lnbits.invoiceKey,
+    url: user.lnbits.url,
+  })
+  const balance = await lnbits.getBalance()
+  const lnurlPs = await lnbits.getLnurlPs()
+  const lastPayment = await lnbits.getLastPayment()
+  let address: string | null = null
+  let lnurl: string | null = null
 
   const sats = Math.floor(balance / 1000)
   const btc = sats / 100_000_000
   const rate = await getKrakenBtcRate()
   const eur = Math.round(btc * rate * 100) / 100
 
-  if (lnurlPay && lnurlPay.username) {
-    address = `${lnurlPay.username}@${new URL(user.lnbits.url).hostname}`
+  if (lnurlPs && lnurlPs.length > 0 && lnurlPs[0].username) {
+    lnurl = lnurlPs[0].lnurl
+    address = `${lnurlPs[0].username}@${new URL(user.lnbits.url).hostname}`
   }
 
   let payment = null
@@ -47,84 +54,8 @@ export default defineLoggedInEventHandler(async (event, authUser) => {
     sats,
     eur,
     rate,
-    lnurl: lnurlPay?.lnurl || null,
+    lnurl,
     address,
     payment,
   })
 })
-
-const getLnbitsBalance = async (user: UserSchema) => {
-  const response = await fetch(`${user.lnbits.url}/api/v1/wallet`, {
-    headers: {
-      'X-Api-Key': user.lnbits.invoiceKey,
-    },
-  })
-
-  if (!response.ok) {
-    throw new Error(`Fetch error: ${response.status} ${response.statusText}`)
-  }
-
-  const data = await response.json() as { balance: number }
-  return data.balance
-}
-
-const LnUrlPayItem = z.object({
-  username: z.string().nullable(),
-  lnurl: z.string(),
-})
-
-type LnUrlPayItem = z.infer<typeof LnUrlPayItem>
-
-const LnUrlPayResponse = z.array(LnUrlPayItem)
-
-const getLnbitsLnurlPay = async (user: UserSchema): Promise<LnUrlPayItem | null> => {
-  const response = await fetch(`${user.lnbits.url}/lnurlp/api/v1/links`, {
-    headers: {
-      'X-Api-Key': user.lnbits.invoiceKey,
-    },
-  })
-
-  if (!response.ok) {
-    // If there are no lnurlp or extension installed it return 403
-    return null
-  }
-
-  const lnurlpays = LnUrlPayResponse.parse(await response.json())
-  return lnurlpays.length === 0 ? null : lnurlpays[0]
-}
-
-const PaymentItem = z.object({
-  amount: z.number(),
-  extra: z.object({
-    comment: z.array(z.string()).optional(),
-  }),
-  time: z.number(),
-})
-
-type PaymentItem = z.infer<typeof PaymentItem>
-
-const PaymentResponse = z.array(PaymentItem)
-
-const getLastLnbitsPayment = async (user: UserSchema) => {
-  const response = await fetch(`${user.lnbits.url}/api/v1/payments?limit=1`, {
-    headers: {
-      'X-Api-Key': user.lnbits.invoiceKey,
-    },
-  })
-
-  if (!response.ok) {
-    throw new Error(`Fetch error: ${response.status} ${response.statusText}`)
-  }
-
-  const json = await response.json()
-  const data = PaymentResponse.parse(json)
-  if (data.length == 0) {
-    return null
-  }
-  const comment = data[0].extra.comment?.join(' ') || null
-  return {
-    amount: data[0].amount,
-    comment,
-    time: data[0].time,
-  }
-}
