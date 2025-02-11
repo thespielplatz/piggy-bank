@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.2.12
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.11...v1.2.12)
+
+### 💅 Refactors
+
+- **dashboard/api:** Move lnbits functions to a class ([c906de8](https://github.com/thespielplatz/piggy-bank/commit/c906de8))
+
+### 📖 Documentation
+
+- Update readme ([c3cc09d](https://github.com/thespielplatz/piggy-bank/commit/c3cc09d))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.2.11
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.10...v1.2.11)
