@@ -1,6 +1,26 @@
 # Changelog
 
 
+## v1.2.11
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.10...v1.2.11)
+
+### 🩹 Fixes
+
+- **InputBox:** Ts type ([e116fcb](https://github.com/thespielplatz/piggy-bank/commit/e116fcb))
+
+### 💅 Refactors
+
+- **Dashboard:** Move functionality to InfoBox and PiggyValue components ([a48fff5](https://github.com/thespielplatz/piggy-bank/commit/a48fff5))
+
+### 🏡 Chore
+
+- **Dashboard:** Move address and lnurl to popup with tab ([484595c](https://github.com/thespielplatz/piggy-bank/commit/484595c))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.2.10
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.9...v1.2.10)
