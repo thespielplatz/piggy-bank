@@ -88,11 +88,11 @@ const isOpen = ref(false)
 const { lnurl, address, payment } = defineProps<{
   lnurl: string,
   address: string,
-  payment?: {
-    time: number,
+  payment: {
     sats: number,
-    comment: string,
-  },
+    comment: string | null,
+    time: number
+  } | null,
 }>()
 
 const emit = defineEmits<{

@@ -4,10 +4,16 @@
       <div class="text-3xl font-black">
         {{ satsText }}
       </div>
-      <div v-if="rate" class="text-sm font-bold">
+      <div
+        v-if="rate"
+        class="text-sm font-bold"
+      >
         {{ `1 BTC = ${rate} EUR` }}
       </div>
-      <div v-if="eur" class="text-sm font-bold">
+      <div
+        v-if="eur"
+        class="text-sm font-bold"
+      >
         {{ `${eur} EUR` }}
       </div>
     </div>
