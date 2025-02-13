@@ -2,14 +2,31 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { z } from 'zod'
 
+const LnBitsSchema = z.object({
+  url: z.string(),
+  invoiceKey: z.string(),
+})
+
+const OnChainSchema = z.union([
+  z.string(),
+  z.object({
+    name: z.string(),
+    address: z.string(),
+  }),
+/*
+  z.object({
+    name: z.string(),
+    xpub: z.string(),
+  }),
+  */
+])
+
 const UserSchema = z.object({
   id: z.string(),
   name: z.string(),
   accessKey: z.string(),
-  lnbits: z.object({
-    url: z.string(),
-    invoiceKey: z.string(),
-  }),
+  lnbits: LnBitsSchema,
+  onchain: z.array(OnChainSchema).optional(),
 })
 
 export type UserSchema = z.infer<typeof UserSchema>
@@ -20,7 +37,7 @@ export const ConfigSchema = z.object({
 
 export type ConfigType = z.infer<typeof ConfigSchema>
 
-export const parseConfig = () => {
+export const parseConfig = (): ConfigType => {
   const configFilePath = path.resolve(process.cwd(), 'config.json')
 
   try {

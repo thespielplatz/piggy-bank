@@ -20,4 +20,13 @@ export default defineNuxtConfig({
     appManifest: false,
   },
   compatibilityDate: '2024-11-01',
+  nitro: {
+    experimental: {
+      tasks: true,
+    },
+    scheduledTasks: {
+      // Run `cms:update` task every minute
+      '* * * * *': ['onchain-sync'],
+    },
+  },
 })
