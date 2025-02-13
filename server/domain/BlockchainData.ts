@@ -1,5 +1,12 @@
+import { strict as assert } from 'node:assert'
+import ElectrumXClient from './electrumX/ElectrumXClient'
+import { addressToBuffer } from './electrumX/lib/addressToBuffer'
+import { bufferToElectrumXScriptHash } from './electrumX/lib/bufferToElectrumXScriptHash'
+import { ScripthashListunspentSchema } from './electrumX/lib/ScripthashListunspentSchema'
+
 export default class BlockchainData {
-  addresses: {
+  electrumXClient: ElectrumXClient | null = null
+  public addresses: {
     address: string,
     sats: number,
   }[]
@@ -16,6 +23,43 @@ export default class BlockchainData {
   }
 
   async sync() {
+    const client = this.getClient()
+    await client.checkConnection()
+    await Promise.all(
+      this.addresses.map(async (address) => {
+        address.sats = await this.getAddressBalance(address.address)
+      }),
+    )
+  }
 
+  private getClient() {
+    if (this.electrumXClient == null) {
+      const config = useConfig()
+      assert(config.electrumXServers, 'No electrumX servers configured')
+      assert(config.electrumXServers.length > 0, 'No electrumX servers configured')
+      const connectionParams = config.electrumXServers[0]
+      this.electrumXClient = new ElectrumXClient(connectionParams)
+    }
+    return this.electrumXClient
+  }
+
+  private async getAddressBalance(address: string) {
+    const client = this.getClient()
+    const scriptHash = BlockchainData.getScriptHash(address)
+    if (scriptHash == null) {
+      return -1
+    }
+    const unkownUtxos = await client.request('blockchain.scripthash.listunspent', [scriptHash])
+    const utxos = ScripthashListunspentSchema.parse(unkownUtxos)
+    const balance = utxos.reduce((sum, utxo) => sum + utxo.value, 0)
+    return balance
+  }
+
+  private static getScriptHash(address: string) {
+    const buffer = addressToBuffer(address)
+    if (buffer == null) {
+      return null
+    }
+    return bufferToElectrumXScriptHash(buffer)
   }
 }

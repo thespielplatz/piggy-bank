@@ -33,13 +33,13 @@ const UserSchema = z.object({
   accessKey: z.string(),
   lnbits: LnBitsSchema,
   onchain: z.array(OnChainSchema).optional(),
-  electrumXServers: z.array(ElectrumXServerSchemna).optional(),
 })
 
 export type UserSchema = z.infer<typeof UserSchema>
 
 export const ConfigSchema = z.object({
   users: z.array(UserSchema).default([]).optional(),
+  electrumXServers: z.array(ElectrumXServerSchemna).optional(),
 })
 
 export type ConfigType = z.infer<typeof ConfigSchema>

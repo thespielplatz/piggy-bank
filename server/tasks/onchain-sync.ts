@@ -11,6 +11,7 @@ export default defineTask({
     consola.info('Running blockchain sync task ...')
     await blockchainData.sync()
     consola.success('Running blockchain sync task finished.')
+    consola.info('Blockchain data:', blockchainData.addresses)
     return { result: 'Success' }
   },
 })
