@@ -14,8 +14,8 @@
   },
   "dependencies": {
     "@nuxt/ui": "^2.21.0",
-    "@thespielplatz/nuxt-auth": "^1.0.0",
-    "@thespielplatz/nuxt-dev-base": "^1.0.5",
+    "@thespielplatz/nuxt-auth": "^1.0.1",
+    "@thespielplatz/nuxt-dev-base": "^1.0.6",
     "nuxt": "^3.15.4",
     "qrcode-svg": "^1.1.0",
     "vue": "latest",
