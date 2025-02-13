@@ -21,12 +21,19 @@ const OnChainSchema = z.union([
   */
 ])
 
+const ElectrumXServerSchemna = z.object({
+  server: z.string(),
+  port: z.number().default(50002),
+  protocolVersion: z.string().default('1.4'),
+})
+
 const UserSchema = z.object({
   id: z.string(),
   name: z.string(),
   accessKey: z.string(),
   lnbits: LnBitsSchema,
   onchain: z.array(OnChainSchema).optional(),
+  electrumXServers: z.array(ElectrumXServerSchemna).optional(),
 })
 
 export type UserSchema = z.infer<typeof UserSchema>
