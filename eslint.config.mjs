@@ -9,11 +9,6 @@ export default createConfigForNuxt({
     // Rules for formatting
     stylistic: true,
   },
-  dirs: {
-    src: [
-      './playground',
-    ],
-  },
 })
   .append({
     rules: {
