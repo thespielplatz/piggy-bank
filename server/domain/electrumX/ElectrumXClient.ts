@@ -72,8 +72,7 @@ export default class ElectrumXClient {
   async request(params: RequestParams) {
     if (isGetBalanceRequest(params)) {
       const unknownResult = await this.client.blockchain_scripthash_getBalance(params.scriptHash)
-      const result = GetBalanceResult.parse(unknownResult)
-      return result
+      return GetBalanceResult.parse(unknownResult)
     }
 
     return await this.client.request(params.method, params.params)
