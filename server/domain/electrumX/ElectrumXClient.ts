@@ -1,4 +1,4 @@
-import { ElectrumClient } from '@keep-network/electrum-client-js'
+import ElectrumClient from '@keep-network/electrum-client-js'
 import consola from 'consola'
 import { addTimeout } from '~/server/utils/addTimeout'
 
