@@ -10,5 +10,7 @@ export default defineNitroPlugin(() => {
     config.users.flatMap(user => user.onchain ?? []).map(onchain => typeof onchain == 'string' ? onchain : onchain.address).forEach(address => blockchainData.addAddress(address))
   }
 
-  runTask('onchain-sync', { })
+  setImmediate(async () => {
+    runTask('onchain-sync', {})
+  })
 })
