@@ -23,8 +23,7 @@ A small piggy bank for pre-coiners, managed by their custodian.
 
 ## Roadmap
 
-- **OnChain Support for Single Address**: Enable on-chain payments.
-- **OnChain Support for XPUB**: Enable on-chain payments.
+- **OnChain Support**: Enable on-chain payments.
 - **Hardware Connectivity**: Integrate with a piggy bank hardware.
 
 ## Configuration
