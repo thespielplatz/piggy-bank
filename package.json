@@ -13,11 +13,11 @@
     "bump-version": "npm run lint && npx changelogen@latest --release && git push --follow-tags"
   },
   "dependencies": {
+    "@keep-network/electrum-client-js": "github:keep-network/electrum-client-js",
     "@nuxt/ui": "^2.21.0",
     "@thespielplatz/nuxt-auth": "^1.0.1",
     "@thespielplatz/nuxt-dev-base": "^1.0.6",
     "bitcoinjs-lib": "^6.1.7",
-    "electrum-client": "^0.0.6",
     "nuxt": "^3.15.4",
     "qrcode-svg": "^1.1.0",
     "vue": "latest",

@@ -1,6 +1,8 @@
-import ElectrumClient from 'electrum-client'
+import { ElectrumClient } from '@keep-network/electrum-client-js'
 import consola from 'consola'
 import { addTimeout } from '~/server/utils/addTimeout'
+
+const DEFUALT_TIMEOUT = 10_000
 
 type ConnectionParameters = {
   server: string
@@ -14,7 +16,7 @@ export default class ElectrumXClient {
   connected = false
 
   constructor(connectionParams: ConnectionParameters) {
-    this.client = new ElectrumClient(connectionParams.port, connectionParams.server, 'tls')
+    this.client = new ElectrumClient(connectionParams.server, connectionParams.port, 'tls')
     this.connectionParams = connectionParams
   }
 
@@ -31,9 +33,9 @@ export default class ElectrumXClient {
     try {
       await addTimeout(async (): Promise<void> => {
         await this.client.connect()
-      })
+      }, DEFUALT_TIMEOUT)
     } catch (error) {
-      consola.error('electrumX.getServerConnection unable to connect to electrumX server: 5 sec timeout reached.', this.connectionParams, error)
+      consola.error('electrumX.getServerConnection unable to connect to electrumX server: ${DEFUALT_TIMEOUT} sec timeout reached.', this.connectionParams, error)
       this.terminateClient()
       throw error
     }
