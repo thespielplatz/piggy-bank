@@ -1,8 +1,7 @@
 import { strict as assert } from 'node:assert'
 import ElectrumXClient from './electrumX/ElectrumXClient'
-import { addressToBuffer } from './electrumX/lib/addressToBuffer'
-import { bufferToElectrumXScriptHash } from './electrumX/lib/bufferToElectrumXScriptHash'
 import { METHOD } from './electrumX/lib/Method'
+import { getScriptHash } from './electrumX/lib/getScriptHash'
 
 export default class BlockchainData {
   electrumXClient: ElectrumXClient | null = null
@@ -45,7 +44,7 @@ export default class BlockchainData {
 
   private async getAddressBalance(address: string) {
     const client = this.getClient()
-    const scriptHash = BlockchainData.getScriptHash(address)
+    const scriptHash = getScriptHash(address)
     if (scriptHash == null) {
       return -1
     }
@@ -54,13 +53,5 @@ export default class BlockchainData {
       scriptHash,
     })
     return balances.confirmed
-  }
-
-  private static getScriptHash(address: string) {
-    const buffer = addressToBuffer(address)
-    if (buffer == null) {
-      return null
-    }
-    return bufferToElectrumXScriptHash(buffer)
   }
 }
