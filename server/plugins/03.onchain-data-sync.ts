@@ -11,6 +11,10 @@ export default defineNitroPlugin(() => {
   }
 
   setImmediate(async () => {
-    runTask('onchain-sync', {})
+    const blockchainData = useBlockchainData()
+    consola.start('Running blockchain sync task ...')
+    await blockchainData.sync()
+    consola.success('Running blockchain sync task finished.')
+    return { result: 'Success' }
   })
 })

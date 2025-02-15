@@ -1,8 +1,10 @@
 import ElectrumClient from '@keep-network/electrum-client-js'
 import consola from 'consola'
-import { GetBalanceResult } from './models/GetBalance'
-import type { RequestParams } from './lib/RequestParams'
-import { isGetBalanceRequest, METHOD_BLOCKCHAIN_SCRIPTHASH_GET_BALANCE } from './lib/RequestParams'
+import { GetBalanceResult } from './models/blockchain/scripthash/GetBalance'
+import type { RequestParams } from './models/RequestParams'
+import { isGetBalanceRequest, isSubScribeRequest } from './models/RequestParams'
+import { SubscribeParams, SubscribeResult } from './models/blockchain/scripthash/Subscribe'
+import { METHOD } from './models/Method'
 import { addTimeout } from '~/server/utils/addTimeout'
 
 const DEFUALT_TIMEOUT = 10_000
@@ -62,10 +64,13 @@ export default class ElectrumXClient {
       this.terminateClient()
       throw error
     }
+
+    this.client.events.on(METHOD.BLOCKCHAIN.SCRIPTHASH.SUBSCRIBE, console.log)
   }
 
   // Function overloads
-  async request(params: Extract<RequestParams, { method: typeof METHOD_BLOCKCHAIN_SCRIPTHASH_GET_BALANCE }>): Promise<GetBalanceResult>
+  async request(params: Extract<RequestParams, { method: typeof METHOD.BLOCKCHAIN.SCRIPTHASH.GET_BALANCE }>): Promise<GetBalanceResult>
+  async request(params: Extract<RequestParams, { method: typeof METHOD.BLOCKCHAIN.SCRIPTHASH.SUBSCRIBE }>): Promise<SubscribeResult>
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async request(params: RequestParams): Promise<any>
 
@@ -73,6 +78,10 @@ export default class ElectrumXClient {
     if (isGetBalanceRequest(params)) {
       const unknownResult = await this.client.blockchain_scripthash_getBalance(params.scriptHash)
       return GetBalanceResult.parse(unknownResult)
+    }
+    if (isSubScribeRequest(params)) {
+      const unknownResult = await this.client.blockchain_scripthash_subscribe(params.scriptHash)
+      return SubscribeResult.parse(unknownResult)
     }
 
     return await this.client.request(params.method, params.params)

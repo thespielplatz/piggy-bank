@@ -1,6 +1,6 @@
 import { strict as assert } from 'node:assert'
 import ElectrumXClient from './electrumX/ElectrumXClient'
-import { METHOD } from './electrumX/lib/Method'
+import { METHOD } from './electrumX/models/Method'
 import { getScriptHash } from './electrumX/lib/getScriptHash'
 
 export default class BlockchainData {
@@ -34,9 +34,19 @@ export default class BlockchainData {
   private getClient() {
     if (this.electrumXClient == null) {
       const config = useConfig()
-      assert(config.electrumXServers, 'No electrumX servers configured')
-      assert(config.electrumXServers.length > 0, 'No electrumX servers configured')
-      const connectionParams = config.electrumXServers[0]
+      let electrumXServers
+      let network
+      if (!isDevelopmentMode()) {
+        network = 'mainnet'
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        electrumXServers = config.electrumXServers?.filter(server => !server.isTestnet) || []
+      } else {
+        network = 'testnet'
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        electrumXServers = config.electrumXServers?.filter(server => server.isTestnet) || []
+      }
+      assert(electrumXServers.length >= 1, `No electrumX servers configured for ${network}`)
+      const connectionParams = electrumXServers[0]
       this.electrumXClient = new ElectrumXClient(connectionParams)
     }
     return this.electrumXClient
@@ -50,6 +60,11 @@ export default class BlockchainData {
     }
     const balances = await client.request({
       method: METHOD.BLOCKCHAIN.SCRIPTHASH.GET_BALANCE,
+      scriptHash,
+    })
+    console.log('scriptHash', scriptHash)
+    await client.request({
+      method: METHOD.BLOCKCHAIN.SCRIPTHASH.SUBSCRIBE,
       scriptHash,
     })
     return balances.confirmed

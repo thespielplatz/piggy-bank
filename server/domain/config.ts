@@ -25,6 +25,7 @@ const ElectrumXServerSchemna = z.object({
   server: z.string(),
   port: z.number().default(50002),
   protocolVersion: z.string().default('1.4'),
+  isTestnet: z.boolean().default(false),
 })
 
 const UserSchema = z.object({
