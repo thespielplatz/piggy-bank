@@ -35,7 +35,7 @@ export default class ElectrumXClient {
         await this.client.connect()
       }, DEFUALT_TIMEOUT)
     } catch (error) {
-      consola.error('electrumX.getServerConnection unable to connect to electrumX server: ${DEFUALT_TIMEOUT} sec timeout reached.', this.connectionParams, error)
+      consola.error(`ElectrumXClient.connect unable to connect to electrumX server: ${DEFUALT_TIMEOUT / 1000} sec timeout reached.`, this.connectionParams, error)
       this.terminateClient()
       throw error
     }
@@ -52,10 +52,10 @@ export default class ElectrumXClient {
     try {
       const serverVersionResult = await addTimeout(async (): Promise<[serverName: string, protocolVersion: string]> => {
         return await this.client.server_version('PiggyBank', this.connectionParams.protocolVersion)
-      })
+      }, DEFUALT_TIMEOUT)
       consola.info(serverVersionResult)
     } catch (error) {
-      consola.error('electrumX.getServerConnection unable to connect to electrumX server: 5 sec timeout reached when querying serverProtocolVersions.', this.connectionParams, error)
+      consola.error(`ElectrumXClient.connect unable to connect to electrumX server: ${DEFUALT_TIMEOUT / 1000} sec timeout reached when querying serverProtocolVersions.`, this.connectionParams, error)
       this.terminateClient()
       throw error
     }
