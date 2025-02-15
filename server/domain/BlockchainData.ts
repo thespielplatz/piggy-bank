@@ -2,7 +2,7 @@ import { strict as assert } from 'node:assert'
 import ElectrumXClient from './electrumX/ElectrumXClient'
 import { addressToBuffer } from './electrumX/lib/addressToBuffer'
 import { bufferToElectrumXScriptHash } from './electrumX/lib/bufferToElectrumXScriptHash'
-import { ScripthashListunspentSchema } from './electrumX/lib/ScripthashListunspentSchema'
+import { METHOD } from './electrumX/lib/Method'
 
 export default class BlockchainData {
   electrumXClient: ElectrumXClient | null = null
@@ -49,10 +49,11 @@ export default class BlockchainData {
     if (scriptHash == null) {
       return -1
     }
-    const unkownUtxos = await client.request('blockchain.scripthash.listunspent', [scriptHash])
-    const utxos = ScripthashListunspentSchema.parse(unkownUtxos)
-    const balance = utxos.reduce((sum, utxo) => sum + utxo.value, 0)
-    return balance
+    const balances = await client.request({
+      method: METHOD.BLOCKCHAIN.SCRIPTHASH.GET_BALANCE,
+      scriptHash,
+    })
+    return balances.confirmed
   }
 
   private static getScriptHash(address: string) {

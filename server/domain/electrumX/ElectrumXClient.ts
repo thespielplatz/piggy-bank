@@ -1,5 +1,8 @@
 import ElectrumClient from '@keep-network/electrum-client-js'
 import consola from 'consola'
+import { GetBalanceResult } from './models/GetBalance'
+import type { RequestParams } from './lib/RequestParams'
+import { isGetBalanceRequest, METHOD_BLOCKCHAIN_SCRIPTHASH_GET_BALANCE } from './lib/RequestParams'
 import { addTimeout } from '~/server/utils/addTimeout'
 
 const DEFUALT_TIMEOUT = 10_000
@@ -61,7 +64,18 @@ export default class ElectrumXClient {
     }
   }
 
-  async request(method: string, params: (string | number)[]) {
-    return await this.client.request(method, params)
+  // Function overloads
+  async request(params: Extract<RequestParams, { method: typeof METHOD_BLOCKCHAIN_SCRIPTHASH_GET_BALANCE }>): Promise<GetBalanceResult>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  async request(params: RequestParams): Promise<any>
+
+  async request(params: RequestParams) {
+    if (isGetBalanceRequest(params)) {
+      const unknownResult = await this.client.blockchain_scripthash_getBalance(params.scriptHash)
+      const result = GetBalanceResult.parse(unknownResult)
+      return result
+    }
+
+    return await this.client.request(params.method, params.params)
   }
 }
