@@ -2,7 +2,8 @@ import consola from 'consola'
 import { ElectrumClient } from './ElectrumClient'
 import { addTimeout, TimeoutError } from '~/server/utils/addTimeout'
 
-const DEFAULT_TIMEOUT = 10_000
+const DEFAULT_TIMEOUT = 30_000
+const DEFAULT_AUTO_RECONNECT_INTERVAL = 1_000
 
 type ConnectionParameters = {
   server: string
@@ -19,11 +20,17 @@ export default class ElectrumConnectionHandler {
   private connectionState: ConnectionState = 'disconnected'
   private connectionPromise?: Promise<ElectrumClient>
   private connectionResolve?: (client: ElectrumClient) => void
+  private autoReconnectInterval: number
 
-  constructor(connectionParams: ConnectionParameters, clientName: string) {
-    this.client = new ElectrumClient(connectionParams.server, connectionParams.port, 'tls')
-    this.connectionParams = connectionParams
-    this.clientName = clientName
+  constructor(params: {
+    connectionParams: ConnectionParameters,
+    clientName: string,
+    autoReconnectInterval?: number,
+  }) {
+    this.client = new ElectrumClient(params.connectionParams.server, params.connectionParams.port, 'tls')
+    this.connectionParams = params.connectionParams
+    this.clientName = params.clientName
+    this.autoReconnectInterval = params.autoReconnectInterval || DEFAULT_AUTO_RECONNECT_INTERVAL
   }
 
   async getConnectedClient(): Promise<ElectrumClient> {
@@ -38,9 +45,7 @@ export default class ElectrumConnectionHandler {
     }
 
     if (this.connectionState != 'connecting') {
-      setImmediate(async () => {
-        await this.connect()
-      })
+      this.connect()
     }
 
     return this.connectionPromise
@@ -54,7 +59,23 @@ export default class ElectrumConnectionHandler {
     }
   }
 
-  async connect() {
+  connect() {
+    setImmediate(async () => {
+      await this.innerConnect()
+    })
+  }
+
+  autoReconnect() {
+    if (this.autoReconnectInterval <= 0) {
+      return
+    }
+
+    setTimeout(async () => {
+      await this.innerConnect()
+    }, this.autoReconnectInterval)
+  }
+
+  private async innerConnect() {
     this.connectionState = 'connecting'
     consola.info('Connecting to electrumX server', this.connectionParams)
     try {
@@ -68,7 +89,8 @@ export default class ElectrumConnectionHandler {
         consola.error('Connection Error:', error)
       }
       this.terminateClient()
-      throw error
+      this.autoReconnect()
+      return
     }
     consola.info('Connected to electrumX server', this.connectionParams)
 
@@ -82,12 +104,14 @@ export default class ElectrumConnectionHandler {
   private onConnectionClosed() {
     consola.info('ElectrumConnectionHandler.onConnectionClosed')
     this.connectionState = 'disconnected'
+    this.autoReconnect()
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private onConnectionError(error: any) {
     consola.info('ElectrumConnectionHandler.onConnectionError', error)
     this.connectionState = 'disconnected'
+    this.autoReconnect()
   }
 
   private terminateClient() {

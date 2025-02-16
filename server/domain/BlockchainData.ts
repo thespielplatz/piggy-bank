@@ -46,7 +46,10 @@ export default class BlockchainData {
       }
       assert(electrumXServers.length >= 1, `No electrumX servers configured for ${network}`)
       const connectionParams = electrumXServers[0]
-      this.clientConnection = new ElectrumConnectionHandler(connectionParams, 'Piggy Bank')
+      this.clientConnection = new ElectrumConnectionHandler({
+        connectionParams,
+        clientName: 'Piggy Bank',
+      })
     }
     return this.clientConnection
   }
