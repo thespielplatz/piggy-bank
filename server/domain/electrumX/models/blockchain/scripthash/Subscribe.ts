@@ -7,6 +7,9 @@ export const SubscribeParams = z.object({
 
 export type SubscribeParams = z.infer<typeof SubscribeParams>
 
-export const SubscribeResult = z.string()
+export const SubscribeResult = z.union([
+  z.string().describe('For script hashes that exist in tx\'s'),
+  z.null().describe('For script hashes that do not exist in the blockchain'),
+])
 
 export type SubscribeResult = z.infer<typeof SubscribeResult>

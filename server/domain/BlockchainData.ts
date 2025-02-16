@@ -1,10 +1,10 @@
 import { strict as assert } from 'node:assert'
-import ElectrumXClient from './electrumX/ElectrumXClient'
+import ElectrumConnectionHandler from './electrumX/ElectrumConnectionHandler'
 import { METHOD } from './electrumX/models/Method'
 import { getScriptHash } from './electrumX/lib/getScriptHash'
 
 export default class BlockchainData {
-  electrumXClient: ElectrumXClient | null = null
+  electrumXClient: ElectrumConnectionHandler | null = null
   public addresses: {
     address: string,
     sats: number,
@@ -47,7 +47,7 @@ export default class BlockchainData {
       }
       assert(electrumXServers.length >= 1, `No electrumX servers configured for ${network}`)
       const connectionParams = electrumXServers[0]
-      this.electrumXClient = new ElectrumXClient(connectionParams)
+      this.electrumXClient = new ElectrumConnectionHandler(connectionParams)
     }
     return this.electrumXClient
   }
@@ -60,11 +60,6 @@ export default class BlockchainData {
     }
     const balances = await client.request({
       method: METHOD.BLOCKCHAIN.SCRIPTHASH.GET_BALANCE,
-      scriptHash,
-    })
-    console.log('scriptHash', scriptHash)
-    await client.request({
-      method: METHOD.BLOCKCHAIN.SCRIPTHASH.SUBSCRIBE,
       scriptHash,
     })
     return balances.confirmed
