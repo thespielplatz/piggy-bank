@@ -81,18 +81,21 @@ export class ElectrumClient extends ElectrumClientBase {
   onClose() {
     super.onClose()
     this.emitConnectionEvent('close')
+    this.connectionEmitter.removeAllListeners()
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onEnd(error: any) {
     super.onEnd(error)
-    this.emitConnectionEvent('end')
+    this.emitConnectionEvent('end', error)
+    this.connectionEmitter.removeAllListeners()
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onError(error: any) {
     super.onError(error)
     this.emitConnectionEvent('error', error)
+    this.connectionEmitter.removeAllListeners()
   }
 
   // Function overloads
