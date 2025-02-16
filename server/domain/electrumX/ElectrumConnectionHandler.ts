@@ -46,6 +46,20 @@ export default class ElectrumConnectionHandler {
     this.connected = true
     await this.checkServerProtocolVersion()
     await this.client.keepAlive()
+
+    this.client.on('close', this.onConnectionClosed)
+    this.client.on('error', this.onConnectionError)
+  }
+
+  private onConnectionClosed() {
+    consola.info('ElectrumConnectionHandler.onConnectionClosed')
+    this.connected = false
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private onConnectionError(error: any) {
+    consola.info('ElectrumConnectionHandler.onConnectionError', error)
+    this.connected = false
   }
 
   private terminateClient() {

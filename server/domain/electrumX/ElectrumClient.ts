@@ -1,11 +1,15 @@
+import { EventEmitter } from 'node:events'
 import ElectrumClientBase from '@keep-network/electrum-client-js'
 import consola from 'consola'
 
-const SERVER_PING_INTERVAL = 10_000
+const SERVER_PING_INTERVAL = 65_000
+
+type ConnectionEvents = 'connect' | 'close' | 'end' | 'error'
 
 export class ElectrumClient extends ElectrumClientBase {
   private keepAliveInterval: number
   private lastPingTime: number = 0
+  private connectionEmitter: EventEmitter = new EventEmitter()
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(host: any, port: any, protocol: any, options?: any) {
@@ -29,7 +33,7 @@ export class ElectrumClient extends ElectrumClientBase {
         || now > this.lastPingTime + this.keepAliveInterval // Ensure at least one ping every full interval
       ) {
         try {
-          consola.info(`Ping to server at ${Date.now().toLocaleString()}`)
+          consola.info(`Ping to server at ${new Date().toISOString()}`)
           await this.server_ping()
           this.lastPingTime = now
         } catch (err) {
@@ -48,7 +52,34 @@ export class ElectrumClient extends ElectrumClientBase {
     }
   }
 
+  on(event: ConnectionEvents, listener: (...args: any[]) => void): this {
+    this.connectionEmitter.on(event, listener)
+    return this
+  }
+
+  protected emitConnectionEvent(event: ConnectionEvents, ...args: any[]): void {
+    this.connectionEmitter.emit(event, ...args);
+  }
+
+  onConnect() {
+    super.onConnect()
+    this.emitConnectionEvent('connect')
+  }
+
   onClose() {
     super.onClose()
+    this.emitConnectionEvent('close')
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onEnd(error: any) {
+    super.onEnd(error)
+    this.emitConnectionEvent('end')
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onError(error: any) {
+    super.onError(error)
+    this.emitConnectionEvent('error', error)
   }
 }
