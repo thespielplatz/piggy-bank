@@ -1,10 +1,10 @@
 import { strict as assert } from 'node:assert'
 import ElectrumConnectionHandler from './electrumX/ElectrumConnectionHandler'
-import { METHOD } from './electrumX/models/Method'
+import { PROTOCOL_METHOD } from './electrumX/models/ProtocolMethod'
 import { getScriptHash } from './electrumX/lib/getScriptHash'
 
 export default class BlockchainData {
-  electrumXClient: ElectrumConnectionHandler | null = null
+  clientConnection: ElectrumConnectionHandler | null = null
   public addresses: {
     address: string,
     sats: number,
@@ -12,6 +12,7 @@ export default class BlockchainData {
 
   constructor() {
     this.addresses = []
+    this.initClient()
   }
 
   addAddress(address: string) {
@@ -22,8 +23,6 @@ export default class BlockchainData {
   }
 
   async sync() {
-    const client = this.getClient()
-    await client.checkConnection()
     await Promise.all(
       this.addresses.map(async (address) => {
         address.sats = await this.getAddressBalance(address.address)
@@ -31,8 +30,8 @@ export default class BlockchainData {
     )
   }
 
-  private getClient() {
-    if (this.electrumXClient == null) {
+  private initClient() {
+    if (this.clientConnection == null) {
       const config = useConfig()
       let electrumXServers
       let network
@@ -47,19 +46,22 @@ export default class BlockchainData {
       }
       assert(electrumXServers.length >= 1, `No electrumX servers configured for ${network}`)
       const connectionParams = electrumXServers[0]
-      this.electrumXClient = new ElectrumConnectionHandler(connectionParams)
+      this.clientConnection = new ElectrumConnectionHandler(connectionParams)
     }
-    return this.electrumXClient
+    return this.clientConnection
   }
 
   private async getAddressBalance(address: string) {
-    const client = this.getClient()
+    const client = await this.clientConnection?.getConnectedClient()
+    if (client == null) {
+      throw new Error('No connected electrum client found')
+    }
     const scriptHash = getScriptHash(address)
     if (scriptHash == null) {
       return -1
     }
     const balances = await client.request({
-      method: METHOD.BLOCKCHAIN.SCRIPTHASH.GET_BALANCE,
+      method: PROTOCOL_METHOD.BLOCKCHAIN.SCRIPTHASH.GET_BALANCE,
       scriptHash,
     })
     return balances.confirmed
