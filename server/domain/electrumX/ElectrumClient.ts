@@ -1,6 +1,12 @@
 import { EventEmitter } from 'node:events'
 import ElectrumClientBase from '@keep-network/electrum-client-js'
 import consola from 'consola'
+import type { RequestParams } from './models/RequestParams'
+import { isGetBalanceRequest, isSubScribeRequest } from './models/RequestParams'
+import type { PROTOCOL_METHOD } from './models/ProtocolMethod'
+import { GetBalanceResult } from './models/blockchain/scripthash/GetBalance'
+import { SubscribeResult } from './models/blockchain/scripthash/Subscribe'
+import { isServerVersionRequest, ServerVersionResult } from './models/server/ServerVersion'
 
 const SERVER_PING_INTERVAL = 65_000
 
@@ -52,13 +58,15 @@ export class ElectrumClient extends ElectrumClientBase {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   on(event: ConnectionEvents, listener: (...args: any[]) => void): this {
     this.connectionEmitter.on(event, listener)
     return this
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected emitConnectionEvent(event: ConnectionEvents, ...args: any[]): void {
-    this.connectionEmitter.emit(event, ...args);
+    this.connectionEmitter.emit(event, ...args)
   }
 
   onConnect() {
@@ -81,5 +89,28 @@ export class ElectrumClient extends ElectrumClientBase {
   onError(error: any) {
     super.onError(error)
     this.emitConnectionEvent('error', error)
+  }
+
+  // Function overloads
+  async request(params: Extract<RequestParams, { method: typeof PROTOCOL_METHOD.BLOCKCHAIN.SCRIPTHASH.GET_BALANCE }>): Promise<GetBalanceResult>
+  async request(params: Extract<RequestParams, { method: typeof PROTOCOL_METHOD.BLOCKCHAIN.SCRIPTHASH.SUBSCRIBE }>): Promise<SubscribeResult>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  async request(params: RequestParams): Promise<any>
+
+  async request(params: RequestParams) {
+    if (isGetBalanceRequest(params)) {
+      const unknownResult = await this.blockchain_scripthash_getBalance(params.scriptHash)
+      return GetBalanceResult.parse(unknownResult)
+    }
+    if (isSubScribeRequest(params)) {
+      const unknownResult = await this.blockchain_scripthash_subscribe(params.scriptHash)
+      return SubscribeResult.parse(unknownResult)
+    }
+    if (isServerVersionRequest(params)) {
+      const unknownResult = this.server_version(params.clientName, params.protocolVersion)
+      return ServerVersionResult.parse(unknownResult)
+    }
+
+    return await super.request(params.method, params.params)
   }
 }
