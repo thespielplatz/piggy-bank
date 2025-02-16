@@ -15,7 +15,7 @@ declare module '@keep-network/electrum-client-js' {
      * logs an error and closes the connection.
      */
     keepAlive(): Promise<void>
-    keepAliveHandle: NodeJS.Timeout
+    keepAliveHandle: NodeJS.Timeout | null
     onClose(): void
     server_version(client_name: any, protocol_version: any): Promise<any>
     server_banner(): Promise<any>
