@@ -11,7 +11,7 @@ type ConnectionParameters = {
   protocolVersion: string
 }
 
-type ConnectionState = 'connected' | 'connecting' | 'disconnected'
+type ConnectionState = 'connected' | 'connecting' | 'disconnected' | 'reconnecting'
 export default class ElectrumConnectionHandler {
   connectionParams: ConnectionParameters
   private clientName: string
@@ -44,7 +44,7 @@ export default class ElectrumConnectionHandler {
       })
     }
 
-    if (this.connectionState != 'connecting') {
+    if (this.connectionState == 'disconnected') {
       this.connect()
     }
 
@@ -67,9 +67,11 @@ export default class ElectrumConnectionHandler {
 
   autoReconnect() {
     if (this.autoReconnectInterval <= 0) {
+      this.connectionState = 'disconnected'
       return
     }
 
+    this.connectionState = 'reconnecting'
     setTimeout(async () => {
       await this.innerConnect()
     }, this.autoReconnectInterval)
