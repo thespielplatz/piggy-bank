@@ -8,7 +8,7 @@ import { GetBalanceResult } from './models/blockchain/scripthash/GetBalance'
 import { SubscribeResult } from './models/blockchain/scripthash/Subscribe'
 import { isServerVersionRequest, ServerVersionResult } from './models/server/ServerVersion'
 
-const SERVER_PING_INTERVAL = 65_000
+const SERVER_PING_INTERVAL = 10_000
 
 type ConnectionEvents = 'connect' | 'close' | 'end' | 'error'
 
@@ -21,6 +21,10 @@ export class ElectrumClient extends ElectrumClientBase {
   constructor(host: any, port: any, protocol: any, options?: any) {
     super(host, port, protocol, options)
     this.keepAliveInterval = SERVER_PING_INTERVAL
+  }
+
+  async connect(clientName: string, electrumProtocolVersion: string): Promise<void> {
+    await super.connect(clientName, electrumProtocolVersion, { maxRetry: 10, callback: null })
   }
 
   async keepAlive(): Promise<void> {
@@ -92,12 +96,12 @@ export class ElectrumClient extends ElectrumClientBase {
   }
 
   // Function overloads
-  async request(params: Extract<RequestParams, { method: typeof PROTOCOL_METHOD.BLOCKCHAIN.SCRIPTHASH.GET_BALANCE }>): Promise<GetBalanceResult>
-  async request(params: Extract<RequestParams, { method: typeof PROTOCOL_METHOD.BLOCKCHAIN.SCRIPTHASH.SUBSCRIBE }>): Promise<SubscribeResult>
+  async typedRequest(params: Extract<RequestParams, { method: typeof PROTOCOL_METHOD.BLOCKCHAIN.SCRIPTHASH.GET_BALANCE }>): Promise<GetBalanceResult>
+  async typedRequest(params: Extract<RequestParams, { method: typeof PROTOCOL_METHOD.BLOCKCHAIN.SCRIPTHASH.SUBSCRIBE }>): Promise<SubscribeResult>
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  async request(params: RequestParams): Promise<any>
+  async typedRequest(params: RequestParams): Promise<any>
 
-  async request(params: RequestParams) {
+  async typedRequest(params: RequestParams) {
     if (isGetBalanceRequest(params)) {
       const unknownResult = await this.blockchain_scripthash_getBalance(params.scriptHash)
       return GetBalanceResult.parse(unknownResult)

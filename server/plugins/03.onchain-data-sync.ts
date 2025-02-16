@@ -1,5 +1,6 @@
 import consola from 'consola'
 import useBlockchainData from '../utils/useBlockchainData'
+import { ElectrumClient } from '../domain/electrumX/ElectrumClient'
 
 export default defineNitroPlugin(() => {
   consola.info('Onchain Data Sync Plugin')

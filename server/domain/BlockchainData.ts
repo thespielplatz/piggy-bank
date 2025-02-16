@@ -46,7 +46,7 @@ export default class BlockchainData {
       }
       assert(electrumXServers.length >= 1, `No electrumX servers configured for ${network}`)
       const connectionParams = electrumXServers[0]
-      this.clientConnection = new ElectrumConnectionHandler(connectionParams)
+      this.clientConnection = new ElectrumConnectionHandler(connectionParams, 'Piggy Bank')
     }
     return this.clientConnection
   }
@@ -60,7 +60,7 @@ export default class BlockchainData {
     if (scriptHash == null) {
       return -1
     }
-    const balances = await client.request({
+    const balances = await client.typedRequest({
       method: PROTOCOL_METHOD.BLOCKCHAIN.SCRIPTHASH.GET_BALANCE,
       scriptHash,
     })

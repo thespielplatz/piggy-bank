@@ -1,11 +1,6 @@
 import consola from 'consola'
 import { ElectrumClient } from './ElectrumClient'
-import { GetBalanceResult } from './models/blockchain/scripthash/GetBalance'
-import type { RequestParams } from './models/RequestParams'
-import { isGetBalanceRequest, isSubScribeRequest } from './models/RequestParams'
-import { SubscribeResult } from './models/blockchain/scripthash/Subscribe'
-import { PROTOCOL_METHOD } from './models/ProtocolMethod'
-import { addTimeout } from '~/server/utils/addTimeout'
+import { addTimeout, TimeoutError } from '~/server/utils/addTimeout'
 
 const DEFAULT_TIMEOUT = 10_000
 
@@ -18,15 +13,17 @@ type ConnectionParameters = {
 type ConnectionState = 'connected' | 'connecting' | 'disconnected'
 export default class ElectrumConnectionHandler {
   connectionParams: ConnectionParameters
+  private clientName: string
 
   private client: ElectrumClient
   private connectionState: ConnectionState = 'disconnected'
   private connectionPromise?: Promise<ElectrumClient>
   private connectionResolve?: (client: ElectrumClient) => void
 
-  constructor(connectionParams: ConnectionParameters) {
+  constructor(connectionParams: ConnectionParameters, clientName: string) {
     this.client = new ElectrumClient(connectionParams.server, connectionParams.port, 'tls')
     this.connectionParams = connectionParams
+    this.clientName = clientName
   }
 
   async getConnectedClient(): Promise<ElectrumClient> {
@@ -62,16 +59,18 @@ export default class ElectrumConnectionHandler {
     consola.info('Connecting to electrumX server', this.connectionParams)
     try {
       await addTimeout(async (): Promise<void> => {
-        await this.client.connect()
+        await this.client.connect(this.clientName, this.connectionParams.protocolVersion)
       }, DEFAULT_TIMEOUT)
     } catch (error) {
-      consola.error(`ElectrumConnectionHandler.connect unable to connect to electrumX server: ${DEFAULT_TIMEOUT / 1000} sec timeout reached.`, this.connectionParams, error)
+      if (error instanceof TimeoutError) {
+        consola.error(`ElectrumConnectionHandler.connect unable to connect to electrumX server: ${DEFAULT_TIMEOUT / 1000} sec timeout reached.`, this.connectionParams, error)
+      } else {
+        consola.error('Connection Error:', error)
+      }
       this.terminateClient()
       throw error
     }
-
-    await this.checkServerProtocolVersion()
-    await this.client.keepAlive()
+    consola.info('Connected to electrumX server', this.connectionParams)
 
     this.client.on('close', this.onConnectionClosed)
     this.client.on('error', this.onConnectionError)
@@ -94,22 +93,5 @@ export default class ElectrumConnectionHandler {
   private terminateClient() {
     this.client.close()
     this.connectionState = 'disconnected'
-  }
-
-  private async checkServerProtocolVersion() {
-    try {
-      const serverVersionResult = await addTimeout(async (): Promise<[serverName: string, protocolVersion: string]> => {
-        return await this.client.request({
-          method: PROTOCOL_METHOD.SERVER.VERSION,
-          clientName: 'PiggyBank',
-          protocolVersion: this.connectionParams.protocolVersion,
-        })
-      }, DEFAULT_TIMEOUT)
-      consola.info(serverVersionResult)
-    } catch (error) {
-      consola.error(`ElectrumConnectionHandler.connect unable to connect to electrumX server: ${DEFAULT_TIMEOUT / 1000} sec timeout reached when querying serverProtocolVersions.`, this.connectionParams, error)
-      this.terminateClient()
-      throw error
-    }
   }
 }
