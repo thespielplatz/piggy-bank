@@ -1,6 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { z } from 'zod'
+import { ElectrumXServer } from './electrumX/models/ElectrumXServer'
 
 const LnBitsSchema = z.object({
   url: z.string(),
@@ -13,20 +14,7 @@ const OnChainSchema = z.union([
     name: z.string(),
     address: z.string(),
   }),
-/*
-  z.object({
-    name: z.string(),
-    xpub: z.string(),
-  }),
-  */
 ])
-
-const ElectrumXServerSchemna = z.object({
-  server: z.string(),
-  port: z.number().default(50002),
-  protocolVersion: z.string().default('1.4'),
-  isTestnet: z.boolean().default(false),
-})
 
 const UserSchema = z.object({
   id: z.string(),
@@ -40,7 +28,7 @@ export type UserSchema = z.infer<typeof UserSchema>
 
 export const ConfigSchema = z.object({
   users: z.array(UserSchema).default([]).optional(),
-  electrumXServers: z.array(ElectrumXServerSchemna).optional(),
+  electrumXServers: z.array(ElectrumXServer).optional(),
 })
 
 export type ConfigType = z.infer<typeof ConfigSchema>

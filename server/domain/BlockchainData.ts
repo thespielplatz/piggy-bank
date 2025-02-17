@@ -1,18 +1,17 @@
-import { strict as assert } from 'node:assert'
-import ElectrumConnectionHandler from './electrumX/ElectrumConnectionHandler'
+import type ElectrumConnectionHandler from './electrumX/ElectrumConnectionHandler'
 import { PROTOCOL_METHOD } from './electrumX/models/ProtocolMethod'
 import { getScriptHash } from './electrumX/lib/getScriptHash'
 
 export default class BlockchainData {
-  clientConnection: ElectrumConnectionHandler | null = null
+  connectionHandler: ElectrumConnectionHandler
   public addresses: {
     address: string,
     sats: number,
   }[]
 
-  constructor() {
+  constructor(connectionHandler: ElectrumConnectionHandler) {
+    this.connectionHandler = connectionHandler
     this.addresses = []
-    this.initClient()
   }
 
   addAddress(address: string) {
@@ -30,32 +29,8 @@ export default class BlockchainData {
     )
   }
 
-  private initClient() {
-    if (this.clientConnection == null) {
-      const config = useConfig()
-      let electrumXServers
-      let network
-      if (!isDevelopmentMode()) {
-        network = 'mainnet'
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        electrumXServers = config.electrumXServers?.filter(server => !server.isTestnet) || []
-      } else {
-        network = 'testnet'
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        electrumXServers = config.electrumXServers?.filter(server => server.isTestnet) || []
-      }
-      assert(electrumXServers.length >= 1, `No electrumX servers configured for ${network}`)
-      const connectionParams = electrumXServers[0]
-      this.clientConnection = new ElectrumConnectionHandler({
-        connectionParams,
-        clientName: 'Piggy Bank',
-      })
-    }
-    return this.clientConnection
-  }
-
   private async getAddressBalance(address: string) {
-    const client = await this.clientConnection?.getConnectedClient()
+    const client = await this.connectionHandler.getConnectedClient()
     if (client == null) {
       throw new Error('No connected electrum client found')
     }
