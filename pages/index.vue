@@ -1,51 +1,53 @@
 <template>
-  <div class="flex flex-col items-center justify-center">
-    <div class="text-center font-heading font-bold text-6xl py-10 flex flex-col items-center">
-      <div>
-        <UIcon
-          name="i-uil-bitcoin"
-          class="-mb-4 text-7xl"
-        />itcoin
-      </div>
-      <div>Piggy Bank</div>
-    </div>
-    <div class="bg-white min-w-96 h-14 pt-1 shadow-md rounded-md text-center font-bold font-mono text-4xl">
-      {{ status }}
-    </div>
-    <div class="h-4" />
-    <div class="grid grid-cols-3 gap-4 p-4 bg-white shadow-md rounded-md">
-      <UButton
-        v-for="data in keys"
-        :key="data.key"
-        :disabled="['enter', 'delete'].includes(data.type) && code.length === 0"
-        @click="handleKeyPress(data)"
-      >
-        <UIcon
-          v-if="data.type === 'enter'"
-          name="i-heroicons-arrow-turn-down-left-16-solid"
-          class="w-8 h-8"
-        />
-        <UIcon
-          v-if="data.type === 'delete'"
-          name="i-heroicons-backspace-16-solid"
-          class="w-8 h-8"
-        />
-        <div
-          v-if="data.type === 'key'"
-          class="text-4xl font-bold"
-        >
-          {{ data.key }}
+  <div>
+    <div class="flex flex-col items-center justify-center">
+      <div class="text-center font-heading font-bold text-6xl py-10 flex flex-col items-center">
+        <div>
+          <UIcon
+            name="i-uil-bitcoin"
+            class="-mb-4 text-7xl"
+          />itcoin
         </div>
-        <div>{{ data.chars }}</div>
-      </UButton>
+        <div>Piggy Bank</div>
+      </div>
+      <div class="bg-white min-w-96 h-14 pt-1 shadow-md rounded-md text-center font-bold font-mono text-4xl">
+        {{ status }}
+      </div>
+      <div class="h-4" />
+      <div class="grid grid-cols-3 gap-4 p-4 bg-white shadow-md rounded-md">
+        <UButton
+          v-for="data in keys"
+          :key="data.key"
+          :disabled="['enter', 'delete'].includes(data.type) && code.length === 0"
+          @click="handleKeyPress(data)"
+        >
+          <UIcon
+            v-if="data.type === 'enter'"
+            name="i-heroicons-arrow-turn-down-left-16-solid"
+            class="w-8 h-8"
+          />
+          <UIcon
+            v-if="data.type === 'delete'"
+            name="i-heroicons-backspace-16-solid"
+            class="w-8 h-8"
+          />
+          <div
+            v-if="data.type === 'key'"
+            class="text-4xl font-bold"
+          >
+            {{ data.key }}
+          </div>
+          <div>{{ data.chars }}</div>
+        </UButton>
+      </div>
     </div>
-  </div>
-  <div class="h-2" />
-  <div class="text-center text-xs font-bold">
-    Powered by <UIcon
-      name="i-bitcoin-icons-lightning-filled"
-      class="text-lg -mb-1"
-    />Lightning
+    <div class="h-2" />
+    <div class="text-center text-xs font-bold">
+      Powered by <UIcon
+        name="i-bitcoin-icons-lightning-filled"
+        class="text-lg -mb-1"
+      />Lightning
+    </div>
   </div>
 </template>
 
