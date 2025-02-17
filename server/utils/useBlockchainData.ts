@@ -1,4 +1,3 @@
-import consola from 'consola'
 import { BlockchainData } from '../domain/BlockchainData'
 import ElectrumConnectionHandler from '../domain/electrumX/ElectrumConnectionHandler'
 import { SyncedBlockchainData } from '../domain/SyncedBlockchainData'
