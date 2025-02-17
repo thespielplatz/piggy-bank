@@ -24,11 +24,14 @@ export default defineNitroPlugin(() => {
     config.users.flatMap(user => user.onchain ?? []).map(onchain => typeof onchain == 'string' ? onchain : onchain.address).forEach(address => blockchainData?.addAddress(address))
   }
 
-  setImmediate(async () => {
-    consola.start('Running blockchain sync task ...')
-    assert(blockchainData != null, 'Blockchain data is not initialized')
-    await blockchainData.sync()
-    consola.success('Running blockchain sync task finished.')
-    return { result: 'Success' }
-  })
+  setImmediate(syncBlockchainData)
+  setTimeout(syncBlockchainData, 1000 * 45)
 })
+
+const syncBlockchainData = async () => {
+  consola.start('Running blockchain sync task ...')
+  assert(blockchainData != null, 'Blockchain data is not initialized')
+  await blockchainData.sync()
+  consola.success('Running blockchain sync task finished.')
+  return { result: 'Success' }
+}

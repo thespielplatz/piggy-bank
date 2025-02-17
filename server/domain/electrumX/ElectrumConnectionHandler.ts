@@ -102,8 +102,9 @@ export default class ElectrumConnectionHandler {
     }
     consola.success('Connected to electrumX server')
 
-    client.on('close', this.onConnectionClosed)
-    client.on('error', this.onConnectionError)
+    client.on('close', this.onConnectionClosed.bind(this))
+    client.on('end', this.onConnectionEnd.bind(this))
+    client.on('error', this.onConnectionError.bind(this))
 
     this.client = client
     this.connectionState = 'connected'
@@ -112,6 +113,13 @@ export default class ElectrumConnectionHandler {
 
   private onConnectionClosed() {
     consola.info('ElectrumConnectionHandler.onConnectionClosed')
+    this.setStateDisconnected()
+    this.autoReconnect()
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private onConnectionEnd(error: any) {
+    consola.info('ElectrumConnectionHandler.onConnectionEnd', error)
     this.setStateDisconnected()
     this.autoReconnect()
   }
