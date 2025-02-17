@@ -21,7 +21,7 @@ const UserSchema = z.object({
   name: z.string(),
   accessKey: z.string(),
   lnbits: LnBitsSchema,
-  onchain: z.array(OnChainSchema).optional(),
+  onchain: z.array(OnChainSchema).optional().default([]),
 })
 
 export type UserSchema = z.infer<typeof UserSchema>

@@ -1,10 +1,19 @@
-import BlockchainData from '../domain/BlockchainData'
+import consola from 'consola'
+import { BlockchainData } from '../domain/BlockchainData'
 import ElectrumConnectionHandler from '../domain/electrumX/ElectrumConnectionHandler'
+import { SyncedBlockchainData } from '../domain/SyncedBlockchainData'
+import { getOnchainAddresses } from './getOnchainAddresses'
 
 let blockchainData: BlockchainData | null = null
 
 export const useBlockchainData = () => {
   if (blockchainData) {
+    return blockchainData
+  }
+
+  const addresses = getOnchainAddresses()
+  if (addresses.length === 0) {
+    blockchainData = new BlockchainData()
     return blockchainData
   }
 
@@ -18,11 +27,9 @@ export const useBlockchainData = () => {
     network: !isDevelopmentMode() ? 'mainnet' : 'testnet',
   })
 
-  blockchainData = new BlockchainData(connectionHandler)
+  const syncedBlockchainData = new SyncedBlockchainData(connectionHandler)
+  addresses.forEach(address => syncedBlockchainData?.addAddress(address))
 
-  if (config.users) {
-    config.users.flatMap(user => user.onchain ?? []).map(onchain => typeof onchain == 'string' ? onchain : onchain.address).forEach(address => blockchainData?.addAddress(address))
-  }
-
+  blockchainData = syncedBlockchainData
   return blockchainData
 }
