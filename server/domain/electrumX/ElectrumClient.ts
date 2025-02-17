@@ -80,6 +80,7 @@ export class ElectrumClient extends ElectrumClientBase {
 
   onClose() {
     super.onClose()
+    this.stopKeepAlive()
     this.emitConnectionEvent('close')
     this.connectionEmitter.removeAllListeners()
   }
@@ -87,6 +88,7 @@ export class ElectrumClient extends ElectrumClientBase {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onEnd(error: any) {
     super.onEnd(error)
+    this.stopKeepAlive()
     this.emitConnectionEvent('end', error)
     this.connectionEmitter.removeAllListeners()
   }
@@ -94,6 +96,7 @@ export class ElectrumClient extends ElectrumClientBase {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onError(error: any) {
     super.onError(error)
+    this.stopKeepAlive()
     this.emitConnectionEvent('error', error)
     this.connectionEmitter.removeAllListeners()
   }
