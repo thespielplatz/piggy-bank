@@ -4,6 +4,9 @@ ARG NODE_VERSION=22.11.0
 
 FROM node:${NODE_VERSION}-slim AS base
 
+# If package.json installs directly via git uncomment this line
+RUN apt-get update && apt-get install -y git
+
 ARG PORT=3000
 
 ENV NODE_ENV=production
