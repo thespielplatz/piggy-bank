@@ -1,6 +1,62 @@
 # Changelog
 
 
+## v1.3.0
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.12...v1.3.0)
+
+### 🚀 Enhancements
+
+- Add BlockchainData Sync class incl. Task ([09ea24c](https://github.com/thespielplatz/piggy-bank/commit/09ea24c))
+- Add onchain sync of user addresses to onchain-sync task ([d4fae8e](https://github.com/thespielplatz/piggy-bank/commit/d4fae8e))
+- **ElectrumClient:** Add connection events ([73edab8](https://github.com/thespielplatz/piggy-bank/commit/73edab8))
+- **ElectrumConnectionHandler:** Add autoreconnect with interval ([70bc36a](https://github.com/thespielplatz/piggy-bank/commit/70bc36a))
+- **BlockChainSync:** Add rotating server list for electrum client in connection handler ([0a9cc02](https://github.com/thespielplatz/piggy-bank/commit/0a9cc02))
+- **Dashboard:** Show onchain ([8136a47](https://github.com/thespielplatz/piggy-bank/commit/8136a47))
+
+### 🩹 Fixes
+
+- Add default export to electrum-client-js type ([fadbf08](https://github.com/thespielplatz/piggy-bank/commit/fadbf08))
+- **ElectrumConnectionHandler:** Bind with this ([e62b001](https://github.com/thespielplatz/piggy-bank/commit/e62b001))
+- Add deleted PiggyQRCode Template ([17880f9](https://github.com/thespielplatz/piggy-bank/commit/17880f9))
+
+### 💅 Refactors
+
+- Colapse lines ([81e4241](https://github.com/thespielplatz/piggy-bank/commit/81e4241))
+- Move getScriptHash to own file ([8056442](https://github.com/thespielplatz/piggy-bank/commit/8056442))
+- **blockchain sync:** From task to electrumx server subscribe ([15a1294](https://github.com/thespielplatz/piggy-bank/commit/15a1294))
+- **ElectrumClient:** Renaming, move ServerVersion to ElectrumClient ([9dfb731](https://github.com/thespielplatz/piggy-bank/commit/9dfb731))
+- Add ElectrumConnectionHandler for permanent connection ([26e9621](https://github.com/thespielplatz/piggy-bank/commit/26e9621))
+- **ElectrumConnectionHandler:** Add connect error handling & remove protocoll version negotiation ([3c4fcc9](https://github.com/thespielplatz/piggy-bank/commit/3c4fcc9))
+- **useBlockchainData:** Move BlockchainData ot utils functions ([ef10036](https://github.com/thespielplatz/piggy-bank/commit/ef10036))
+
+### 📖 Documentation
+
+- Update roadmap ([4727897](https://github.com/thespielplatz/piggy-bank/commit/4727897))
+
+### 🏡 Chore
+
+- Update tsp nuxt modules ([7e39f25](https://github.com/thespielplatz/piggy-bank/commit/7e39f25))
+- Add electrumX server to config.json ([da8d244](https://github.com/thespielplatz/piggy-bank/commit/da8d244))
+- Remove dirs from lintconfig ([23740a4](https://github.com/thespielplatz/piggy-bank/commit/23740a4))
+- Async call in sync plugin code ([fa5934a](https://github.com/thespielplatz/piggy-bank/commit/fa5934a))
+- Replace electrum client library ([ba8586b](https://github.com/thespielplatz/piggy-bank/commit/ba8586b))
+- **task: OnChainSync:** Change consola style from info to start and success ([e0cb517](https://github.com/thespielplatz/piggy-bank/commit/e0cb517))
+- Type BLOCKCHAIN.SCRIPTHASH.GET_BALANCE ([a33981c](https://github.com/thespielplatz/piggy-bank/commit/a33981c))
+- Update nuxt-dev-base to 1.1.0 ([a1b77cb](https://github.com/thespielplatz/piggy-bank/commit/a1b77cb))
+- Add subscribe ([165276e](https://github.com/thespielplatz/piggy-bank/commit/165276e))
+- Extend ElectrumClient with better keepAlive method ([90e8d9f](https://github.com/thespielplatz/piggy-bank/commit/90e8d9f))
+- **ElectrumClient:** Add removeAllListeners to prevent memory leaks ([849a3ac](https://github.com/thespielplatz/piggy-bank/commit/849a3ac))
+- **ElectrumConnectionHandler:** Subscribe to onEnd event of ElectrumClient ([ea2f2e5](https://github.com/thespielplatz/piggy-bank/commit/ea2f2e5))
+- **ElectrumClient:** Stop keepalive on end, close or error ([4c61709](https://github.com/thespielplatz/piggy-bank/commit/4c61709))
+- Turn off onchain data sync if not onchain data is configured ([349fdb8](https://github.com/thespielplatz/piggy-bank/commit/349fdb8))
+- Remove unused import ([47a18ed](https://github.com/thespielplatz/piggy-bank/commit/47a18ed))
+- Eslint fix ([30452e7](https://github.com/thespielplatz/piggy-bank/commit/30452e7))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.2.12
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.11...v1.2.12)
