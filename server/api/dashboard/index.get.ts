@@ -15,6 +15,10 @@ export const DashboardDto = z.object({
     comment: z.string().nullable(),
     time: z.number(),
   }).nullable(),
+  onchain: z.array(z.object({
+    label: z.string(),
+    address: z.string(),
+  })),
 })
 export type DashboardDto = z.infer<typeof DashboardDto>
 
@@ -24,16 +28,29 @@ export default defineLoggedInEventHandler(async (event, authUser) => {
     apiKey: user.lnbits.invoiceKey,
     url: user.lnbits.url,
   })
-  const balance = await lnbits.getBalance()
+  const lnbitsBalance = await lnbits.getBalance()
   const lnurlPs = await lnbits.getLnurlPs()
-  const lastPayment = await lnbits.getLastPayment()
-  let address: string | null = null
-  let lnurl: string | null = null
+  const lastLnbitsPayment = await lnbits.getLastPayment()
+  const lnbitsSats = Math.floor(lnbitsBalance / 1000)
 
-  const sats = Math.floor(balance / 1000)
+  const blockchainData = useBlockchainData()
+  let onchainSats = 0
+  user.onchain?.forEach((onchain) => {
+    if (typeof onchain === 'string') {
+      onchainSats += blockchainData.getBalance(onchain)
+    } else {
+      onchainSats += blockchainData.getBalance(onchain.address)
+    }
+  })
+
+  const sats = lnbitsSats + onchainSats
+
   const btc = sats / 100_000_000
   const rate = await getKrakenBtcRate()
   const eur = Math.round(btc * rate * 100) / 100
+
+  let address: string | null = null
+  let lnurl: string | null = null
 
   if (lnurlPs && lnurlPs.length > 0 && lnurlPs[0].username) {
     lnurl = lnurlPs[0].lnurl
@@ -41,13 +58,20 @@ export default defineLoggedInEventHandler(async (event, authUser) => {
   }
 
   let payment = null
-  if (lastPayment) {
+  if (lastLnbitsPayment) {
     payment = {
-      sats: Math.floor((lastPayment.amount || 0) / 1000),
-      comment: lastPayment.comment || null,
-      time: lastPayment.time || 0,
+      sats: Math.floor((lastLnbitsPayment.amount || 0) / 1000),
+      comment: lastLnbitsPayment.comment || null,
+      time: lastLnbitsPayment.time || 0,
     }
   }
+
+  const onchain = user.onchain?.map((onchain) => {
+    if (typeof onchain === 'string') {
+      return { label: 'OnChain', address: onchain }
+    }
+    return onchain
+  })
 
   return DashboardDto.parse({
     name: user.name,
@@ -57,5 +81,6 @@ export default defineLoggedInEventHandler(async (event, authUser) => {
     lnurl,
     address,
     payment,
+    onchain,
   })
 })

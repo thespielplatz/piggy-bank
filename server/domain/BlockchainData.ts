@@ -4,7 +4,7 @@ import { getScriptHash } from './electrumX/lib/getScriptHash'
 
 export default class BlockchainData {
   connectionHandler: ElectrumConnectionHandler
-  public addresses: {
+  private addresses: {
     address: string,
     sats: number,
   }[]
@@ -15,10 +15,18 @@ export default class BlockchainData {
   }
 
   addAddress(address: string) {
+    if (this.addresses.find(a => a.address === address)) {
+      return
+    }
+
     this.addresses.push({
       address,
       sats: 0,
     })
+  }
+
+  getBalance(address: string): number {
+    return this.addresses.find(a => a.address === address)?.sats ?? 0
   }
 
   async sync() {

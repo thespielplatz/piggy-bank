@@ -11,7 +11,7 @@ const LnBitsSchema = z.object({
 const OnChainSchema = z.union([
   z.string(),
   z.object({
-    name: z.string(),
+    label: z.string(),
     address: z.string(),
   }),
 ])

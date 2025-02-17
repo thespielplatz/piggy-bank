@@ -43,7 +43,9 @@ export class ElectrumClient extends ElectrumClientBase {
         || now > this.lastPingTime + this.keepAliveInterval // Ensure at least one ping every full interval
       ) {
         try {
-          consola.info(`Ping to server at ${new Date().toISOString()}`)
+          if (isDevelopmentMode()) {
+            consola.info(`(isDevelopmentMode) Ping to server at ${new Date().toISOString()}`)
+          }
           await this.server_ping()
           this.lastPingTime = now
         } catch (err) {
