@@ -27,24 +27,16 @@
         />
       </div>
     </template>
-    <div v-if="tabIndex === 0">
-      <h4 class="pb-4 font-semibold text-gray-900 dark:text-white text-center">
-        {{ address }}
-      </h4>
+    <h4 class="pb-4 font-semibold text-gray-900 dark:text-white text-center">
+      {{ tabs && tabs.length > tabIndex ? tabs[tabIndex].title : '' }}
+    </h4>
+    <div v-if="tabs && tabs.length > tabIndex ? tabs[tabIndex].qrCode : ''">
       <!-- eslint-disable vue/no-v-html -->
       <div
         class="flex justify-center"
-        v-html="addressQrCode"
+        v-html="createQrCode(tabs[tabIndex].qrCode || '')"
       />
       <!-- eslint-enable vue/no-v-html -->
-    </div>
-    <div v-if="tabIndex === 1">
-      <!-- eslint-disable vue/no-v-html -->
-      <div
-        class="flex justify-center"
-        v-html="lnurlQrCode"
-      />
-    <!-- eslint-enable vue/no-v-html -->
     </div>
     <UTabs
       :items="tabs"
@@ -58,47 +50,40 @@
 
 import QRCode from 'qrcode-svg'
 
-const tabs = ref<{ label: string, slot: string, icon: string }[]>([])
-const addressQrCode = ref('')
-const lnurlQrCode = ref('')
+const tabs = ref<{ title: string, label: string, icon: string, qrCode?: string }[]>([])
 const tabIndex = ref(0)
 
-const { lnurl, address } = defineProps<{
+const { lnurl, address, onchain } = defineProps<{
   lnurl: string,
   address: string,
+  onchain: { label: string, address: string }[],
 }>()
 
 onMounted(() => {
   if (address) {
     tabs.value.push({
+      title: address,
       label: 'Address',
-      slot: 'address',
       icon: 'i-heroicons-at-symbol-16-solid',
+      qrCode: address,
     })
-    addressQrCode.value = new QRCode({
-      content: address,
-      padding: 0,
-      width: 200,
-      height: 200,
-      color: '#000000',
-      background: '#ffffff',
-    }).svg()
   }
   if (lnurl) {
     tabs.value.push({
-      label: 'LNURL',
-      slot: 'lnurl',
+      title: 'LNURL Pay',
+      label: 'LNURLp',
       icon: 'i-heroicons-qr-code',
+      qrCode: lnurl,
     })
-    lnurlQrCode.value = new QRCode({
-      content: lnurl,
-      padding: 0,
-      width: 200,
-      height: 200,
-      color: '#000000',
-      background: '#ffffff',
-    }).svg()
   }
+  onchain.forEach((chain) => {
+    tabs.value.push({
+      title: chain.label,
+      label: chain.label,
+      icon: 'i-akar-icons-link-chain',
+      qrCode: chain.address,
+    })
+  })
 })
 
 const onTabChange = (index: number) => {
@@ -108,5 +93,16 @@ const onTabChange = (index: number) => {
 const emit = defineEmits<{
   close: []
 }>()
+
+const createQrCode = (content: string) => {
+  return new QRCode({
+    content,
+    padding: 0,
+    width: 200,
+    height: 200,
+    color: '#000000',
+    background: '#ffffff',
+  }).svg()
+}
 
 </script>

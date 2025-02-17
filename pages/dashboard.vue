@@ -29,6 +29,7 @@
         ref="infoBoxRef"
         :lnurl="lnurl"
         :address="address"
+        :onchain="onchain"
         :payment="payment"
         @logout="logout"
       />
@@ -51,6 +52,7 @@ const satsText = ref('Loading ...')
 const lnurl = ref('')
 const address = ref('')
 const lastUpdate = ref('')
+const onchain = ref<{ label: string, address: string }[]>([])
 const sats = ref(0)
 const title = ref('')
 const rate = ref(0)
@@ -114,6 +116,8 @@ const fetchData = async () => {
   lnurl.value = response.lnurl || ''
   address.value = response.address || ''
   payment.value = response.payment
+  onchain.value = response.onchain
+
   rate.value = response.rate
   eur.value = response.eur
   sats.value = response.sats

@@ -22,7 +22,14 @@
       v-if="payment"
       class="pt-1 text-xs font-bold"
     >
-      <UDivider label="Last Payment" />
+      <UDivider>
+        Last
+        <UIcon
+          name="i-iconamoon-lightning-1-fill"
+          class="w-4 h-4"
+        />
+        Payment
+      </UDivider>
       <div class="flex justify-between">
         <div>{{ formatTime(payment?.time) }}</div>
         <div>{{ formatSats(payment?.sats) }} BTC</div>
@@ -38,6 +45,7 @@
     <InfoBoxPopupContent
       :lnurl="lnurl"
       :address="address"
+      :onchain="onchain"
       @close="closePopup()"
     />
   </UModal>
@@ -47,7 +55,7 @@
 
 const isOpen = ref(false)
 
-const { lnurl, address, payment } = defineProps<{
+const { lnurl, address, payment, onchain } = defineProps<{
   lnurl: string,
   address: string,
   payment: {
@@ -55,6 +63,7 @@ const { lnurl, address, payment } = defineProps<{
     comment: string | null,
     time: number
   } | null,
+  onchain: { label: string, address: string }[],
 }>()
 
 const hasDepositAvaliable = computed(() => lnurl != '' || address != '')
