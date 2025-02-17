@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.3.1
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.3.0...v1.3.1)
+
+### 🏡 Chore
+
+- Npm audit fix ([9bc4b42](https://github.com/thespielplatz/piggy-bank/commit/9bc4b42))
+
+### 🤖 CI
+
+- Install git in Dockerfile for package ([4d9c602](https://github.com/thespielplatz/piggy-bank/commit/4d9c602))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.3.0
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.2.12...v1.3.0)
