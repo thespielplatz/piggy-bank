@@ -20,10 +20,11 @@ A small piggy bank for pre-coiners, managed by their custodian.
 - **Dynamic Buttons**: Displays an `@ Address` button if a username is set in the extension.
 - **Popup Closure**: Automatically closes LNURL popups upon payment receipt.
 - **Print**: Print a users dashboard to have a give away QR Code
+- **OnChain Support**: Enable on-chain addresses.
 
 ## Roadmap
 
-- **OnChain Support**: Enable on-chain payments.
+- **OnChain XPUB Support**: Add on-chain XPUB support.
 - **Hardware Connectivity**: Integrate with a piggy bank hardware.
 
 ## Configuration
@@ -41,10 +42,38 @@ Create a `config.json` file. Example configuration:
         "url": "https://your.lnbits.com",
         "invoiceKey": "6843498d6bbd4452b5853f7abdc3dac9"
       }
+      "onchain": [
+        "tb1qcgrvt4dsjf3shn4tpv0ntlkhzs7438cv46nmj6",
+        {
+          "label": "Card Wallet",
+          "address": "tb1q6eqjcwlslkkw4ucwle9gmvfgyc5g0xa6upnnwe"
+        }
+      ]
     }
-  ]
+  ],
+  "electrumXServers": [
+    {
+      "server": "electrum.blockstream.info",
+      "port": 50002,
+      "protocolVersion": "1.4"
+    }, {
+      "server": "electrum.blockstream.info",
+      "port": 60002,
+      "protocolVersion": "1.4",
+      "isTestnet": true
+    }
+  ]    
 }
 ```
+
+### OnChain Support
+
+* The onchain field is an array that can contain either individual addresses or labeled entries.
+* If you use onchain addresses, `electrumXServers` need to be configured
+
+> [!NOTE]
+> When running the project in development mode (`npm run dev`), it will use the **Bitcoin Testnet** by default.  
+> Ensure you are aware of this!
 
 ## Give away
 
