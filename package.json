@@ -1,6 +1,6 @@
 {
   "name": "piggy-bank",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "type": "module",
   "homepage": "https://github.com/thespielplatz/piggy-bank",
   "scripts": {
