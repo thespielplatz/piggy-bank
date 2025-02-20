@@ -1,20 +1,15 @@
 <template>
-  <div class="font-sans flex flex-col min-h-svh">
-    <UContainer class="flex-grow px-0">
-      <NuxtPage />
-    </UContainer>
-    <div class="print:hidden">
-      <FooterMain />
+  <UApp>
+    <div class="font-sans flex flex-col min-h-svh bg-background-blue text-text">
+      <UContainer class="flex-grow px-0">
+        <NuxtPage />
+      </UContainer>
+      <div class="print:hidden">
+        <FooterMain />
+      </div>
     </div>
-  </div>
-  <UNotifications />
+    <!--
+    <UNotifications />
+    -->
+  </UApp>
 </template>
-
-<script setup lang="ts">
-
-onMounted(() => {
-  document.body.classList.add('bg-background')
-  document.body.classList.add('text-text')
-})
-
-</script>

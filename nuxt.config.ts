@@ -15,9 +15,24 @@ export default defineNuxtConfig({
   },
   css: [
     '@/assets/css/global.css',
+    '@/assets/css/main.css',
   ],
+  ui: {
+    theme: {
+      colors: ['primary', 'secondary', 'info', 'success', 'warning', 'error', 'footer'],
+    },
+  },
   experimental: {
     appManifest: false,
   },
   compatibilityDate: '2024-11-01',
+  fonts: {
+    families: [
+      { name: 'Fredoka', provider: 'google' },
+      { name: 'Tektur', provider: 'google' },
+    ],
+    experimental: {
+      processCSSVariables: true,
+    },
+  },
 })

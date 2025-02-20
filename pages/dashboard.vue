@@ -12,7 +12,7 @@
         </div>
       </div>
     </div>
-    <div class="relative h-[290px] w-[384px] bg-[url('/img/piggy.png')] bg-cover bg-center font-numbers ">
+    <div class="relative h-[290px] w-[384px] bg-[url('/img/piggy.png')] bg-cover bg-center font-numbers">
       <div class="hidden print:flex absolute top-[65px] w-80 ml-8 justify-center">
         <PiggyQRCode />
       </div>

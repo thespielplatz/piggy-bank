@@ -23,5 +23,8 @@ logs
 .env.*
 !.env.example
 
+# Nuxt Fonts
+.data
+
 data
 config.json

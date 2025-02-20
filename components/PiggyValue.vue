@@ -1,18 +1,18 @@
 <template>
   <div class="flex justify-center">
     <div class="flex flex-col items-end">
-      <div class="text-3xl font-black">
+      <div class="text-3xl font-semibold">
         {{ satsText }}
       </div>
       <div
         v-if="rate"
-        class="text-sm font-bold"
+        class="text-sm font-semibold"
       >
         {{ `1 BTC = ${rate} EUR` }}
       </div>
       <div
         v-if="eur"
-        class="text-sm font-bold"
+        class="text-sm font-semibold"
       >
         {{ `${eur} EUR` }}
       </div>

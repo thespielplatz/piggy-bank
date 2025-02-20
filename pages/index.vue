@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex flex-col items-center justify-center">
-      <div class="text-center font-heading font-bold text-6xl py-10 flex flex-col items-center">
+      <div class="text-center font-heading font-semibold text-6xl py-10 flex flex-col items-center">
         <div>
           <UIcon
             name="i-uil-bitcoin"

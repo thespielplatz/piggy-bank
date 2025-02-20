@@ -3,21 +3,3 @@ html, body {
   touch-action: none; /* Prevents drag gestures */
   xoverflow: hidden;
 }
-
-@font-face {
-  font-family: "Fredoka";
-  font-optical-sizing: auto;
-  font-weight: 600;
-  font-style: normal;
-  font-variation-settings: "wdth" 100;
-  src: url("/assets/fonts/fredoka/Fredoka-VariableFont_wdth,wght.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "Tektur";
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  font-variation-settings: "wdth" 100;
-  src: url("/assets/fonts/tektur/Tektur-VariableFont_wdth,wght.ttf") format("truetype");
-}
