@@ -1,6 +1,32 @@
 # Changelog
 
 
+## v1.3.2
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.3.1...v1.3.2)
+
+### 🩹 Fixes
+
+- Add primary color doger blue ([64faa6f](https://github.com/thespielplatz/piggy-bank/commit/64faa6f))
+- InfoBox update to nuxtui 3.x ([6c2451e](https://github.com/thespielplatz/piggy-bank/commit/6c2451e))
+- Toast colors ([8ceb70c](https://github.com/thespielplatz/piggy-bank/commit/8ceb70c))
+
+### 📖 Documentation
+
+- Add onchain feat documentation ([caf0b08](https://github.com/thespielplatz/piggy-bank/commit/caf0b08))
+
+### 🏡 Chore
+
+- Update to newer nuxt-dev-base & nuxtui 3.x ([586f152](https://github.com/thespielplatz/piggy-bank/commit/586f152))
+
+### 🤖 CI
+
+- Update Dockerfile to newest version ([4b2b782](https://github.com/thespielplatz/piggy-bank/commit/4b2b782))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.3.1
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.3.0...v1.3.1)
