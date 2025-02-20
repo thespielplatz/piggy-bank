@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.3.5
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.3.4...v1.3.5)
+
+### 🩹 Fixes
+
+- **dashboard:** Font weight in title ([f232380](https://github.com/thespielplatz/piggy-bank/commit/f232380))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.3.4
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.3.3...v1.3.4)
