@@ -102,10 +102,9 @@ const login = async () => {
     toast.add({
       title: 'Code not valid',
       icon: 'i-heroicons-x-circle-16-solid',
-      color: 'red',
-      timeout: 1500,
-      pauseTimeoutOnHover: false,
-      closeButton: false,
+      color: 'error',
+      duration: 1500,
+      close: false,
     })
   }
 }

@@ -100,9 +100,8 @@ const fetchData = async () => {
         title: 'Error',
         description: error.message,
         icon: 'i-heroicons-x-circle-16-solid',
-        color: 'red',
-        timeout: 0,
-        closeButton: false,
+        color: 'error',
+        close: false,
       })
       satsText.value = 'Error'
       stopPolling()
@@ -133,8 +132,8 @@ const fetchData = async () => {
       title: response.payment?.comment || 'New Payment',
       description: `+${response.payment?.sats} sats`,
       icon: 'i-heroicons-currency-bitcoin-16-solid',
-      color: 'green',
-      timeout: 2000,
+      color: 'success',
+      duration: 2000,
     })
     lastSatsValue = response.sats
   }
