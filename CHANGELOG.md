@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.3.3
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.3.2...v1.3.3)
+
+### 🩹 Fixes
+
+- **ci:** Install git also for git repos in package-lock.json ([e72e6c4](https://github.com/thespielplatz/piggy-bank/commit/e72e6c4))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.3.2
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.3.1...v1.3.2)
