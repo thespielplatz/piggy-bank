@@ -1,14 +1,23 @@
 <template>
   <div class="p-2 bg-white shadow-md rounded-md">
     <div class="flex justify-between">
-      <UButton
-        v-if="hasDepositAvaliable"
-        icon="i-heroicons-arrow-down-on-square-20-solid"
-        size="sm"
-        @click="openPopup()"
-      >
-        Deposit
-      </UButton>
+      <UModal v-model:open="isOpen">
+        <UButton
+          v-if="hasDepositAvaliable"
+          icon="i-heroicons-arrow-down-on-square-20-solid"
+          size="sm"
+        >
+          Deposit
+        </UButton>
+        <template #content>
+          <InfoBoxPopupContent
+            :lnurl="lnurl"
+            :address="address"
+            :onchain="onchain"
+            @close="closePopup()"
+          />
+        </template>
+      </UModal>
       <UButton
         icon="i-heroicons-arrow-up-tray-20-solid"
         size="sm"
@@ -22,14 +31,18 @@
       v-if="payment"
       class="pt-1 text-xs font-bold"
     >
-      <UDivider>
-        Last
-        <UIcon
-          name="i-iconamoon-lightning-1-fill"
-          class="w-4 h-4"
-        />
-        Payment
-      </UDivider>
+      <div class="text-center pt-2 pb-4 flex items-center">
+        <div class="mr-2 border-t border-gray-300 flex-grow" />
+        <div>
+          Last
+          <UIcon
+            name="i-iconamoon-lightning-1-fill"
+            class="w-4 h-4 -mb-1"
+          />
+          Payment
+        </div>
+        <div class="ml-2 border-t border-gray-300 flex-grow" />
+      </div>
       <div class="flex justify-between">
         <div>{{ formatTime(payment?.time) }}</div>
         <div>{{ formatSats(payment?.sats) }} BTC</div>
@@ -39,22 +52,11 @@
       </div>
     </div>
   </div>
-  <UModal
-    v-model="isOpen"
-  >
-    <InfoBoxPopupContent
-      :lnurl="lnurl"
-      :address="address"
-      :onchain="onchain"
-      @close="closePopup()"
-    />
-  </UModal>
 </template>
 
 <script setup lang="ts">
 
 const isOpen = ref(false)
-
 const { lnurl, address, payment, onchain } = defineProps<{
   lnurl: string,
   address: string,
@@ -74,10 +76,6 @@ const emit = defineEmits<{
 
 const closePopup = () => {
   isOpen.value = false
-}
-
-const openPopup = () => {
-  isOpen.value = true
 }
 
 defineExpose({

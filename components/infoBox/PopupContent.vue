@@ -1,14 +1,5 @@
 <template>
-  <UCard
-    :ui="{
-      base: 'h-full flex flex-col',
-      rounded: '',
-      divide: 'divide-y divide-gray-100 dark:divide-gray-800',
-      body: {
-        base: '',
-      },
-    }"
-  >
+  <UCard>
     <template #header>
       <div class="flex items-center justify-between">
         <h3 class="font-semibold text-2xl text-gray-900 dark:text-white">
@@ -19,7 +10,7 @@
           />itcoin
         </h3>
         <UButton
-          color="gray"
+          color="neutral"
           variant="ghost"
           icon="i-heroicons-x-mark-20-solid"
           class="-my-1"
@@ -40,8 +31,9 @@
     </div>
     <UTabs
       :items="tabs"
+      :content="false"
       class="w-full pt-5"
-      @change="onTabChange"
+      @update:model-value="onTabChange"
     />
   </UCard>
 </template>
@@ -86,8 +78,8 @@ onMounted(() => {
   })
 })
 
-const onTabChange = (index: number) => {
-  tabIndex.value = index
+const onTabChange = (payload: string | number) => {
+  tabIndex.value = Number(payload)
 }
 
 const emit = defineEmits<{
