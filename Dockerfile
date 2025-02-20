@@ -4,8 +4,8 @@ ARG NODE_VERSION=22.11.0
 
 FROM node:${NODE_VERSION}-slim AS base
 
-# Install Git only if package.json contains dependencies that require it (e.g., dependencies with 'git+' URLs)
-RUN if grep -q 'git+' package.json; then apt-get update && apt-get install -y git; fi
+# Install Git only if package.json or package-lock.json contains dependencies that require it (e.g., dependencies with 'git+' URLs)
+RUN if grep -q 'git+' package.json package-lock.json; then apt-get update && apt-get install -y git; fi
 
 ARG PORT=3000
 
