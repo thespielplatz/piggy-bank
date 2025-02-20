@@ -1,6 +1,8 @@
 export default defineAppConfig({
   ui: {
-    primary: 'dodger-blue', /* currently not work: Bug: https://volta.net/nuxt/ui/issues/2007 */
+    colors: {
+      primary: 'dodgerblue',
+    },
     container: {
       constrained: 'max-w-2xl',
     },

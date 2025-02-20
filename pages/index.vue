@@ -18,6 +18,7 @@
         <UButton
           v-for="data in keys"
           :key="data.key"
+          color="primary"
           :disabled="['enter', 'delete'].includes(data.type) && code.length === 0"
           @click="handleKeyPress(data)"
         >

@@ -7,31 +7,19 @@
 
   --font-sans: 'Public Sans', sans-serif;
 
-  --color-background-blue: #fbcf48;
+  --color-background-yellow: #fbcf48;
 
   --color-text: #1e4563;
-
-  --color-dodger-blue-50: #f0f8fe;
-  --color-dodger-blue-100: #ddedfc;
-  --color-dodger-blue-200: #c3e1fa;
-  --color-dodger-blue-300: #9acff6;
-  --color-dodger-blue-400: #6bb5ef;
-  --color-dodger-blue-500: #4f9bea;
-  --color-dodger-blue-600: #337bdd;
-  --color-dodger-blue-700: #2a66cb;
-  --color-dodger-blue-800: #2853a5;
-  --color-dodger-blue-900: #254883;
-  --color-dodger-blue-950: #1b2d50;
-
-  --color-astronaut-blue-50: #f3f7fc;
-  --color-astronaut-blue-100: #e5f0f9;
-  --color-astronaut-blue-200: #c5dff2;
-  --color-astronaut-blue-300: #92c5e7;
-  --color-astronaut-blue-400: #58a8d8;
-  --color-astronaut-blue-500: #338dc4;
-  --color-astronaut-blue-600: #2370a6;
-  --color-astronaut-blue-700: #1d5a87;
-  --color-astronaut-blue-800: #1c4d70;
-  --color-astronaut-blue-900: #1e4563;
-  --color-astronaut-blue-950: #132a3e;
+  
+  --color-dodgerblue-50: #f0f8fe;
+  --color-dodgerblue-100: #ddedfc;
+  --color-dodgerblue-200: #c3e1fa;
+  --color-dodgerblue-300: #9acff6;
+  --color-dodgerblue-400: #6bb5ef;
+  --color-dodgerblue-500: #4f9bea;
+  --color-dodgerblue-600: #337bdd;
+  --color-dodgerblue-700: #2a66cb;
+  --color-dodgerblue-800: #2853a5;
+  --color-dodgerblue-900: #254883;
+  --color-dodgerblue-950: #1b2d50;
 }
