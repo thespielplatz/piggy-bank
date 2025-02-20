@@ -4,9 +4,6 @@ ARG NODE_VERSION=22.11.0
 
 FROM node:${NODE_VERSION}-slim AS base
 
-# Install Git only if package.json or package-lock.json contains dependencies that require it (e.g., dependencies with 'git+' URLs)
-RUN if grep -q 'git+' package.json package-lock.json; then apt-get update && apt-get install -y git; fi
-
 ARG PORT=3000
 
 ENV NODE_ENV=production
@@ -16,10 +13,15 @@ WORKDIR /app
 # Build
 FROM base AS build
 
-#COPY --link package.json package-lock.json . 
+COPY --link package.json .
+COPY package-lock.json .
+
+# Install Git only if package.json or package-lock.json contains dependencies that require it (e.g., dependencies with 'git+' URLs)
+RUN if grep -q 'git+' package.json package-lock.json; then apt-get update && apt-get install -y git; fi
+
+RUN rm package-lock.json
 # This isn’t working because the dependencies in package-lock.json are specific to the architecture 
 # of the machine where npm install was run.
-COPY --link package.json .
 
 RUN npm install --production=false
 
