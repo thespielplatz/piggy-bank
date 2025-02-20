@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center justify-center">
-    <div class="text-center font-heading font-bold text-6xl pt-10 pb-6">
+    <div class="text-center font-heading font-semibold text-6xl pt-10 pb-6">
       <div>{{ title }}</div>
       <div class="flex justify-center">
         <div>
