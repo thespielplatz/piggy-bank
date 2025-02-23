@@ -48,12 +48,11 @@ const toast = useToast()
 
 const infoBoxRef = ref<InstanceType<typeof InfoBox> | null>(null)
 
-const satsText = ref('Loading ...')
 const lnurl = ref('')
 const address = ref('')
 const lastUpdate = ref('')
 const onchain = ref<{ label: string, address: string }[]>([])
-const sats = ref(0)
+const sats = ref(-1)
 const title = ref('')
 const rate = ref(0)
 const eur = ref(0)
@@ -103,7 +102,6 @@ const fetchData = async () => {
         color: 'error',
         close: false,
       })
-      satsText.value = 'Error'
       stopPolling()
       firstTime = false
       return
