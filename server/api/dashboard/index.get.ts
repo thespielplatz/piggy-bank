@@ -28,7 +28,15 @@ export default defineLoggedInEventHandler(async (event, authUser) => {
     apiKey: user.lnbits.invoiceKey,
     url: user.lnbits.url,
   })
-  const lnbitsBalance = await lnbits.getBalance()
+  let lnbitsBalance = 0
+  try {
+    lnbitsBalance = await lnbits.getBalance()
+  } catch {
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Error fetching lnbits balance. Please check invoice key!',
+    })
+  }
   const lnurlPs = await lnbits.getLnurlPs()
   const lastLnbitsPayment = await lnbits.getLastPayment()
   const lnbitsSats = Math.floor(lnbitsBalance / 1000)

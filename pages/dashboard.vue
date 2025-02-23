@@ -18,6 +18,7 @@
       </div>
       <div class="absolute top-[120px] w-80 ml-6 flex flex-col justify-center print:hidden">
         <PiggyValue
+          ref="piggyValueRef"
           :sats="sats"
           :eur="eur"
           :rate="rate"
@@ -39,7 +40,7 @@
 
 <script setup lang="ts">
 
-import type { InfoBox } from '#components'
+import type { InfoBox, PiggyValue } from '#components'
 
 const POLLING_INTERVAL = 2000
 
@@ -47,6 +48,7 @@ const { $auth } = useNuxtApp()
 const toast = useToast()
 
 const infoBoxRef = ref<InstanceType<typeof InfoBox> | null>(null)
+const piggyValueRef = ref<InstanceType<typeof PiggyValue> | null>(null)
 
 const lnurl = ref('')
 const address = ref('')
@@ -97,12 +99,15 @@ const fetchData = async () => {
     if (firstTime) {
       toast.add({
         title: 'Error',
-        description: error.message,
+        description: error.statusMessage,
         icon: 'i-heroicons-x-circle-16-solid',
         color: 'error',
+        duration: 60 * 1000,
         close: false,
       })
       stopPolling()
+      console.error(error)
+      piggyValueRef.value?.showError(error.statusMessage)
       firstTime = false
       return
     }

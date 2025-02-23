@@ -66,4 +66,12 @@ const calculateDuration = (endValue: number): number => {
   return minDuration + t * (maxDuration - minDuration)
 }
 
+const showError = (message: string) => {
+  satsText.value = message
+}
+
+defineExpose({
+  showError,
+})
+
 </script>
