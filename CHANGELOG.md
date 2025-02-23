@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.3.7
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.3.6...v1.3.7)
+
+### 🩹 Fixes
+
+- Show electrumx server error only on onchain ([746c3dd](https://github.com/thespielplatz/piggy-bank/commit/746c3dd))
+- Temporary fix of nuxtui bug ([5d9de24](https://github.com/thespielplatz/piggy-bank/commit/5d9de24))
+
+### 🏡 Chore
+
+- Update eslint-config package ([c9f47aa](https://github.com/thespielplatz/piggy-bank/commit/c9f47aa))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.3.6
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.3.5...v1.3.6)
