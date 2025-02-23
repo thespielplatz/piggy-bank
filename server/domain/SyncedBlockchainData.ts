@@ -7,7 +7,7 @@ export class SyncedBlockchainData extends BlockchainData {
   connectionHandler: ElectrumConnectionHandler
 
   constructor(connectionHandler: ElectrumConnectionHandler) {
-    super()
+    super('ok')
     this.connectionHandler = connectionHandler
   }
 

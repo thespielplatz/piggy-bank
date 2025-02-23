@@ -1,5 +1,6 @@
 import z from 'zod'
 import type { UserSchema } from '~/server/domain/config'
+import { SyncedBlockchainData } from '~/server/domain/SyncedBlockchainData'
 import getKrakenBtcRate from '~/server/utils/getKrakenBtcRate'
 import LnBits from '~/server/utils/LnBits'
 
@@ -42,6 +43,15 @@ export default defineLoggedInEventHandler(async (event, authUser) => {
   const lnbitsSats = Math.floor(lnbitsBalance / 1000)
 
   const blockchainData = useBlockchainData()
+  if (user.onchain?.length >= 0
+    && !(blockchainData instanceof SyncedBlockchainData)
+    && blockchainData.reason === 'no-servers') {
+    throw createError({
+      statusCode: 500,
+      statusMessage: `Onchain addresses configured, but no servers available. Please check your configuration.`,
+    })
+  }
+
   let onchainSats = 0
   user.onchain?.forEach((onchain) => {
     if (typeof onchain === 'string') {
