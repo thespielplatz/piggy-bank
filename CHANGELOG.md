@@ -1,6 +1,26 @@
 # Changelog
 
 
+## v1.3.6
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.3.5...v1.3.6)
+
+### 🩹 Fixes
+
+- If sats are 0, show value piggy bank value ([75bf8aa](https://github.com/thespielplatz/piggy-bank/commit/75bf8aa))
+
+### 🏡 Chore
+
+- Show error on lnbits key error ([02b3913](https://github.com/thespielplatz/piggy-bank/commit/02b3913))
+- Skip electrumx sync if no servers ([1860bc1](https://github.com/thespielplatz/piggy-bank/commit/1860bc1))
+- Show no electrumx servers error, if onchain addresses are configured ([5a12e40](https://github.com/thespielplatz/piggy-bank/commit/5a12e40))
+- Npm audit fix ([7ca446f](https://github.com/thespielplatz/piggy-bank/commit/7ca446f))
+- Switch to @nuxt/eslint ([daa0428](https://github.com/thespielplatz/piggy-bank/commit/daa0428))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.3.5
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.3.4...v1.3.5)
