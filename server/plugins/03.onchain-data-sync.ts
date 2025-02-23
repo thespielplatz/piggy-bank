@@ -8,7 +8,12 @@ export default defineNitroPlugin(() => {
     setImmediate(syncBlockchainData)
     setInterval(syncBlockchainData, 1000 * 15)
   } else {
-    consola.info('No onchain addresses found. Skipping onchain data sync.')
+    if (blockchainData.reason === 'no-addresses') {
+      consola.info('No onchain addresses found. Skipping onchain data sync.')
+    }
+    if (blockchainData.reason === 'no-servers') {
+      consola.info('No electrumx servers found. Skipping onchain data sync.')
+    }
   }
 })
 

@@ -1,11 +1,14 @@
+type Reasons = 'no-addresses' | 'no-servers'
 export class BlockchainData {
+  public reason: Reasons
   protected addresses: {
     address: string,
     sats: number,
   }[]
 
-  constructor() {
+  constructor(reason: Reasons) {
     this.addresses = []
+    this.reason = reason
   }
 
   addAddress(address: string) {

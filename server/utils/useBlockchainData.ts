@@ -12,13 +12,18 @@ export const useBlockchainData = () => {
 
   const addresses = getOnchainAddresses()
   if (addresses.length === 0) {
-    blockchainData = new BlockchainData()
+    blockchainData = new BlockchainData('no-addresses')
     return blockchainData
   }
 
   const config = useConfig()
 
   const electrumXServers = config.electrumXServers || []
+
+  if (electrumXServers.length === 0) {
+    blockchainData = new BlockchainData('no-servers')
+    return blockchainData
+  }
 
   const connectionHandler = new ElectrumConnectionHandler({
     electrumXServers,
