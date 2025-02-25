@@ -28,11 +28,5 @@
     "@nuxt/eslint-config": "^1.1.0",
     "@types/qrcode-svg": "^1.1.5",
     "changelogen": "^0.5.7"
-  },
-  "overrides": {
-    "tailwindcss": "4.0.7",
-    "@tailwindcss/node": "4.0.7",
-    "@tailwindcss/postcss": "4.0.7",
-    "@tailwindcss/vite": "4.0.7"
   }
 }
