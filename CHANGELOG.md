@@ -1,6 +1,25 @@
 # Changelog
 
 
+## v1.3.8
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.3.7...v1.3.8)
+
+### 🩹 Fixes
+
+- Use doger blue ([8b9edf5](https://github.com/thespielplatz/piggy-bank/commit/8b9edf5))
+
+### 🏡 Chore
+
+- Remove tailwind bugfix ([519ebb6](https://github.com/thespielplatz/piggy-bank/commit/519ebb6))
+- Remove tailwind bugfix" ([aa5c1db](https://github.com/thespielplatz/piggy-bank/commit/aa5c1db))
+- Npm audit fix and updates ([98b970f](https://github.com/thespielplatz/piggy-bank/commit/98b970f))
+- Add padding to qr codes ([75346d6](https://github.com/thespielplatz/piggy-bank/commit/75346d6))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.3.7
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.3.6...v1.3.7)
