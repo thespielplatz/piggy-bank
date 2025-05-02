@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.4.0
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.3.8...v1.4.0)
+
+### 🚀 Enhancements
+
+- Add copy 2 clipboard for deposit options ([e66db15](https://github.com/thespielplatz/piggy-bank/commit/e66db15))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.3.8
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.3.7...v1.3.8)
