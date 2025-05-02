@@ -89,7 +89,7 @@ const emit = defineEmits<{
 const createQrCode = (content: string) => {
   return new QRCode({
     content,
-    padding: 0,
+    padding: 2,
     width: 200,
     height: 200,
     color: '#000000',
