@@ -18,9 +18,17 @@
         />
       </div>
     </template>
-    <h4 class="pb-4 font-semibold text-gray-900 dark:text-white text-center">
-      {{ tabs && tabs.length > tabIndex ? tabs[tabIndex].title : '' }}
-    </h4>
+    <div class="pb-4 flex items-center justify-center">
+      <h4 class="font-semibold text-gray-900 dark:text-white text-center">
+        {{ tabs && tabs.length > tabIndex ? tabs[tabIndex].title : '' }}
+      </h4>
+      <UButton
+        color="neutral"
+        variant="ghost"
+        icon="i-mdi-clipboard-multiple-outline"
+        @click="copyToClipboard(tabs[tabIndex].qrCode || '')"
+      />
+    </div>
     <div v-if="tabs && tabs.length > tabIndex ? tabs[tabIndex].qrCode : ''">
       <!-- eslint-disable vue/no-v-html -->
       <div
@@ -44,6 +52,7 @@ import QRCode from 'qrcode-svg'
 
 const tabs = ref<{ title: string, label: string, icon: string, qrCode?: string }[]>([])
 const tabIndex = ref(0)
+const toast = useToast()
 
 const { lnurl, address, onchain } = defineProps<{
   lnurl: string,
@@ -95,6 +104,28 @@ const createQrCode = (content: string) => {
     color: '#000000',
     background: '#ffffff',
   }).svg()
+}
+
+const copyToClipboard = async (textToCopy: string) => {
+  try {
+    await navigator.clipboard.writeText(textToCopy)
+    toast.add({
+      title: 'Copied to clipboard',
+      icon: 'i-heroicons-check-circle-20-solid',
+      color: 'success',
+      duration: 1500,
+      close: false,
+    })
+  } catch (err) {
+    toast.add({
+      title: 'Failed to copy',
+      icon: 'i-heroicons-x-circle-20-solid',
+      color: 'error',
+      duration: 1500,
+      close: false,
+    })
+    console.error('Failed to copy: ', err)
+  }
 }
 
 </script>
