@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.5.0
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.4.0...v1.5.0)
+
+### 🚀 Enhancements
+
+- Add keyboard input for index ([5c3aba7](https://github.com/thespielplatz/piggy-bank/commit/5c3aba7))
+- Add char to number convertion for  keyboard input ([ff833bf](https://github.com/thespielplatz/piggy-bank/commit/ff833bf))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.4.0
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.3.8...v1.4.0)
