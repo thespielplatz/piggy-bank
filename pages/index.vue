@@ -77,6 +77,17 @@ const keys = [
   { key: '', chars: 'Enter', type: 'enter' },
 ]
 
+const letterToNumberMap: Record<string, string> = {
+  a: '2', b: '2', c: '2',
+  d: '3', e: '3', f: '3',
+  g: '4', h: '4', i: '4',
+  j: '5', k: '5', l: '5',
+  m: '6', n: '6', o: '6',
+  p: '7', q: '7', r: '7', s: '7',
+  t: '8', u: '8', v: '8',
+  w: '9', x: '9', y: '9', z: '9',
+}
+
 const handleButtonPress = (data: { key: string, type: string }): void => {
   switch (data.type) {
     case 'delete':
@@ -94,10 +105,14 @@ const handleButtonPress = (data: { key: string, type: string }): void => {
 }
 
 const handlePhysicalKeyPress = (event: KeyboardEvent) => {
-  if (event.key >= '0' && event.key <= '9') {
-    code.value += event.key
+  const key = event.key.toLowerCase()
+
+  if (key >= '0' && key <= '9') {
+    code.value += key
+  } else if (letterToNumberMap[key]) {
+    code.value += letterToNumberMap[key]
   } else if (event.key === 'Backspace') {
-    backspaceAction()
+    code.value = code.value.slice(0, -1)
   } else if (event.key === 'Enter') {
     login()
     return
