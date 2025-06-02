@@ -20,7 +20,7 @@
           :key="data.key"
           color="primary"
           :disabled="['enter', 'delete'].includes(data.type) && code.length === 0"
-          @click="handleKeyPress(data)"
+          @click="handleButtonPress(data)"
         >
           <UIcon
             v-if="data.type === 'enter'"
@@ -57,7 +57,9 @@
 const { $auth } = useNuxtApp()
 const toast = useToast()
 
-const status = ref('')
+const status = computed(() => {
+  return code.value.length > 0 ? '* '.repeat(Math.min(code.value.length, 9)).trim() : ''
+})
 const code = ref('')
 
 const keys = [
@@ -75,10 +77,10 @@ const keys = [
   { key: '', chars: 'Enter', type: 'enter' },
 ]
 
-const handleKeyPress = (data: { key: string, type: string }): void => {
+const handleButtonPress = (data: { key: string, type: string }): void => {
   switch (data.type) {
     case 'delete':
-      code.value = code.value.slice(0, -1)
+      backspaceAction()
       break
 
     default:
@@ -89,7 +91,23 @@ const handleKeyPress = (data: { key: string, type: string }): void => {
     login()
     return
   }
-  status.value = '* '.repeat(Math.min(code.value.length, 9)).trim()
+}
+
+const handlePhysicalKeyPress = (event: KeyboardEvent) => {
+  if (event.key >= '0' && event.key <= '9') {
+    code.value += event.key
+  } else if (event.key === 'Backspace') {
+    backspaceAction()
+  } else if (event.key === 'Enter') {
+    login()
+    return
+  }
+}
+
+const backspaceAction = () => {
+  if (code.value.length > 0) {
+    code.value = code.value.slice(0, -1)
+  }
 }
 
 const login = async () => {
@@ -110,7 +128,12 @@ const login = async () => {
 }
 
 onMounted(async () => {
+  window.addEventListener('keydown', handlePhysicalKeyPress)
   await $auth.redirectIfLoggedIn()
+})
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handlePhysicalKeyPress)
 })
 
 </script>
