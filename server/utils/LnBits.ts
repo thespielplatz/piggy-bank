@@ -13,10 +13,17 @@ type LnUrlPayResponse = z.infer<typeof LnUrlPayResponse>
 
 const PaymentItem = z.object({
   amount: z.number(),
+  memo: z.string().nullable().optional(),
   extra: z.object({
-    comment: z.array(z.string()).optional(),
+    comment: z.string().optional().nullable(),
   }),
-  time: z.number(),
+  time: z
+    .string()
+    .transform((val) => {
+      const [datePart] = val.split('.')
+      return new Date(datePart).getTime() / 1000
+    })
+    .describe('Transaction time'),
 })
 
 type PaymentItem = z.infer<typeof PaymentItem>
@@ -62,11 +69,12 @@ export default class LnBits {
     }
 
     const json = await response.json()
+    console.log('LnBits getLastPayment response:', json)
     const data = PaymentResponse.parse(json)
     if (data.length == 0) {
       return null
     }
-    const comment = data[0].extra.comment?.join(' ') || null
+    const comment = data[0].extra.comment || data[0].memo || null
     return {
       amount: data[0].amount,
       comment,
