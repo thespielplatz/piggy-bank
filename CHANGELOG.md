@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.5.1
+
+[compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.5.0...v1.5.1)
+
+### 🩹 Fixes
+
+- Update to lnbits api 1.2.1 ([df91ce4](https://github.com/thespielplatz/piggy-bank/commit/df91ce4))
+
+### 🏡 Chore
+
+- Npm audit fix ([7775eab](https://github.com/thespielplatz/piggy-bank/commit/7775eab))
+
+### ❤️ Contributors
+
+- Thespielplatz <informatics@gmx.net>
+
 ## v1.5.0
 
 [compare changes](https://github.com/thespielplatz/piggy-bank/compare/v1.4.0...v1.5.0)
